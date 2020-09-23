@@ -1,0 +1,33 @@
+{
+  "name": "js-fullstack-boilerplate",
+  "version": "1.0.0",
+  "description": "Javascript full-stack quick app setup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filvecchiato/js-fullstack-boilerplate.git"
+  },
+  "keywords": [
+    "npm",
+    "node",
+    "react",
+    "javascript",
+    "koa",
+    "express",
+    "mongo",
+    "postgresql",
+    "redux"
+  ],
+  "author": "Filippo Vecchiato",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/filvecchiato/js-fullstack-boilerplate/issues"
+  },
+  "homepage": "https://github.com/filvecchiato/js-fullstack-boilerplate#readme",
+  "dependencies": {
+    "commitizen": "^4.2.1"
+  }
+}
