@@ -1,8 +1,6 @@
-import inquirer from 'inquirer';
 
 const fullStackStarter = () => {
-  
+  return 'hello';
 };
 
-
-module.exports = fullStackStarter;
+export default fullStackStarter;

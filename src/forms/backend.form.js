@@ -6,7 +6,7 @@
 
 // database type: mongo + mongoose, postregsql + sequelize 
 
-module.exports = [
+export default [
   {
     type: 'list',
     name: 'backendType',

@@ -6,6 +6,8 @@
 
 // State-management
 
+// Testing for now single option, will be multi-option
+
 // Routing
 
 // React Helmet
@@ -14,7 +16,7 @@
 
 // Documentation
 
-module.exports = [
+export default [
   {
     type: 'list',
     name: 'style-system',
@@ -38,6 +40,12 @@ module.exports = [
     name: 'helmet',
     message: 'Would you like to use React-helmet (Y/n)?',
     default: 'yes'
+  },
+  {
+    type: 'list',
+    name: 'testing',
+    message: 'Testing Library?',
+    choices: ['Jest', 'Mocha', 'Cypress']
   },
   {
     type: 'confirm',
