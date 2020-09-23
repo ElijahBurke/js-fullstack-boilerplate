@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/filvecchiato/js-fullstack-boilerplate#readme",
   "dependencies": {
-    "commitizen": "^4.2.1"
+    "commitizen": "^4.2.1",
+    "inquirer": "^7.3.3"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^3.3.0"
