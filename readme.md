@@ -4,6 +4,16 @@
 
 This is a Javascript Fullstack CLI to quickly create and manage Javascript-based SPAs and servers. 
 
+
+to run the module install globally:
+
+  npm i -g fullstack-JS
+
+to start set up process run in selected root folder:
+
+  fullStackJS
+
+  
 <!-- inquirer -->
 
 <!-- install command here -->

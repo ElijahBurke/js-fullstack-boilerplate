@@ -6,10 +6,10 @@
 
 // database type: mongo + mongoose, postregsql + sequelize 
 
-export default [
+module.exports = [
   {
     type: 'list',
-    name: 'backendType',
+    name: 'backend_type',
     message: 'Select Backend Framework: ',
     choices: ['express', 'koa', 'graphQL'],
   },

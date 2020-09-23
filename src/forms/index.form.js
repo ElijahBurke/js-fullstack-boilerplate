@@ -2,7 +2,7 @@
 
 module.exports = [
   {
-    name: 'app-name',
+    name: 'app_name',
     message: 'Input Application name (frontend and backend)',
     default: 'JS-fullStack-app'
   },
@@ -12,11 +12,11 @@ module.exports = [
     default: '1.0.0'
   },
   {
-    name: 'description-frontend',
+    name: 'description_frontend',
     message: 'Frontend Description:'
   },
   {
-    name: 'description-backend',
+    name: 'description_backend',
     message: 'Backend Description:'
   },
   {

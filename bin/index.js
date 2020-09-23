@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import fullStackJS from '../src/index';
+const generateFullStackApp = require('../src/index');
 
-fullStackJS();
+generateFullStackApp();
