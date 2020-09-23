@@ -29,5 +29,13 @@
   "homepage": "https://github.com/filvecchiato/js-fullstack-boilerplate#readme",
   "dependencies": {
     "commitizen": "^4.2.1"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
