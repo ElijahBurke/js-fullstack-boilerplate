@@ -4,7 +4,7 @@
 
 This is a Javascript Fullstack CLI to quickly create and manage Javascript-based SPAs and servers. 
 
-<!-- propmpts or inquirer -->
+<!-- inquirer -->
 
 <!-- install command here -->
 
