@@ -1,0 +1,19 @@
+{
+  "name": "create_app_fs",
+  "version": "",
+  "description": "Fullstack Javascript App in Boilerplate",
+  "main": "index.js",
+  "files": [
+    "CHANGELOG.md",
+    "README.md",
+    "package.json"
+  ],
+  "keywords": [
+    "library"
+  ],
+  "author": "",
+  "license": "",
+  "private": ,
+  "scripts": {
+  }
+}

@@ -89,26 +89,34 @@ async function userForms(appName) {
 
 // generate function of entire app folder structure
 async function generateFullStackApp(appName) {
+  const types = ['common', 'backend']; //add frontend when ready
   try {
     await shell.echo('');
     await shell.echo(' ------ Creating Root Folder ------ ');
     await shell.echo('');
+
     await createDirectories(appName);
+
     await shell.echo('');
     await shell.echo(' ------ Root folder created ------ ');
     await shell.echo('');
 
     const answers = await userForms(appName);
-    const types = ['common', 'backend']; //add frontend when ready
+    
+
     await shell.echo('');
     await shell.echo(' ------ Files generation in progress ------ ');
     await shell.echo('');
+
     types.forEach(type => require(`./modules/${type}/common/config.json`).forEach(file => {
       createFile(answers, file, ['modules', type, 'common', 'templates'], type);
     }));
+
     await shell.echo('');
+
     await shell.echo(' ------ Files generation completed, happy coding! ------ ');
     await shell.echo('');
+
   } catch (e) {
     throw new Error(`Error creating the directory, ${e}`);
   }

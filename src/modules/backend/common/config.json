@@ -19,5 +19,19 @@
     "path": [],
     "template": false,
     "dependencies": []
+  },
+  {
+    "file_name": "config.js",
+    "name": "config.js.mustache",
+    "path": [],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "index.js",
+    "name": "index.js.mustache",
+    "path": [],
+    "template": true,
+    "dependencies": []
   }
 ]
