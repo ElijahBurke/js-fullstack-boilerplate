@@ -1,15 +1,14 @@
 {
-  "name": "{{ name }}",
-  "version": "{{ version }}",
-  "description": "{{ description_backend }}",
-  "main": "src/index.js",
-  "author": "{{ author }}",
-  "license": "{{ license }}",
-  "private": "{{ private }}",
+  "name": "{{ common.app_name }}_backend",
+  "version": "{{ common.version }}",
+  "description": "{{ common.description_backend }}",
+  "main": "index.js",
+  "author": "{{ common.author }}",
+  "license": "{{ common.license }}",
+  "private": "{{ common.private }}",
   "scripts": {
-    "start": "node backend/index.js",
-    "dev": "nodemon backend/index.js",
-    "test": "jest"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "node",
@@ -25,18 +24,18 @@
     "good-console": "^8.0.0",
     "good-squeeze": "^5.1.0",
     "inert": "^5.1.3",
-    {{#mongodb}}
+    {{#backend.mongodb}}
     "mongoose": "^5.8.1",
-    {{/mongodb}}
-    {{#mysql}}
+    {{/backend.mongodb}}
+    {{#backend.mysql}}
     "mysql": "^2.17.1",
-    {{/mysql}}
-    {{#postgresql}}
+    {{/backend.mysql}}
+    {{#backend.postgresql}}
     "pg": "^7.14.0",
-    {{/postgresql}}
-    {{#websockets}}
+    {{/backend.postgresql}}
+    {{#backend.websockets}}
     "socket.io": "^2.3.0",
-    {{/websockets}}
+    {{/backend.websockets}}
     "vision": "^5.4.4"
   },
   "devDependencies": {
