@@ -25,7 +25,7 @@ const createFile = (options, file, path, type) => {
     let to = resolve(...file.path, file.file_name);
   
     if (type !== 'common') {
-      to = resolve(...file.path, `${options.app_name}_${type}`,file.file_name);
+      to = resolve(`${options.app_name}_${type}`, ...file.path, file.file_name);
     }
 
     if (type === 'backend') {

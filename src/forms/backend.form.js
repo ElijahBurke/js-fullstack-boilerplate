@@ -18,5 +18,10 @@ module.exports = [
     name: 'database',
     message: 'Select Database Engine : ',
     choices: ['mongoDB', 'postgreSQL'],
-  }
+  },
+  {
+    name: 'db_name',
+    message: 'Database name',
+    default: ''
+  },
 ];

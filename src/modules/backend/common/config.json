@@ -33,5 +33,36 @@
     "path": [],
     "template": true,
     "dependencies": []
+  },
+  {
+    "file_name": "index.js",
+    "name": "index.router.js.mustache",
+    "path": ["routers"],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "index.js",
+    "name": "index.controller.js.mustache",
+    "path": ["controllers"],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "index.js",
+    "name": "index.model.js.mustache",
+    "path": ["models"],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "example.js",
+    "name": "example.model.js.mustache",
+    "path": [
+      "models"
+    ],
+    "template": true,
+    "dependencies": []
   }
 ]
+
