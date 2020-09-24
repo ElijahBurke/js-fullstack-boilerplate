@@ -33,8 +33,7 @@ const createFile = (options, file, path, type) => {
     });
     
   } else {
-    console.log('no template');
-    // copyFileSync(from, to);
+    copyFileSync(from, to);
   }
 }
 
