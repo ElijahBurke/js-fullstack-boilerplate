@@ -1,0 +1,23 @@
+ [
+  { 
+    "file_name": "README.md",
+    "name": "README.md",
+    "path": [],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "file_name": "package.json",
+    "name": "package.json.mustache",
+    "path": [],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "configFSApp.json",
+    "name": "configFSApp.json.mustache",
+    "path": ["config"],
+    "template" : true,
+    "dependencies": []
+  }
+ ]

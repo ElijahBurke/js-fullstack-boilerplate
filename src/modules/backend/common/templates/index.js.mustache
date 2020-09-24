@@ -1,0 +1,35 @@
+'use strict';
+
+{{#backend.express}}
+const express = require('express');
+const app = express();
+{{/backend.express}}
+
+{{#backend.koa}}
+const Koa = require('koa');
+const app = new Koa();
+const serve = require('koa-static');
+const bodyParser = require('koa-bodyparser');
+{{/backend.koa}}
+
+const conf = require('./config');
+const router = require('./routers');
+
+const PORT = 3001;
+
+{{#backend.express}}
+app.use(express.static(conf.clientPath));
+app.use(express.json());
+app.use(router);
+{{/backend.express}}
+
+{{#backend.koa}}
+app.use(serve(conf.clientPath));
+app.use(bodyParser());
+app.use(router.routes());
+{{/backend.koa}}
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`); // eslint-disable-line no-console
+}); 
+

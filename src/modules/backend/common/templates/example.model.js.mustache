@@ -1,0 +1,45 @@
+'use strict';
+
+{{#backend.mongoDB}}
+const mongoose = require('./');
+
+const Schema = mongoose.Schema;
+
+const exampleSchema = new Schema({
+  name: Boolean,
+  content: String,
+  timeStamp: {
+    type: Date,
+    default: Date.now
+  },
+  updated_at: {
+    type: Date,
+    default: Date.now
+  },
+  created_at: {
+    type: Date,
+    default: Date.now
+  },
+});
+
+const Message = mongoose.model('Example', exampleSchema);
+
+module.exports = Example;
+{{/backend.mongoDB}}
+
+{{#backend.postgreSQL}}
+
+module.exports = (sequelize, DataTypes) => sequelize.define('Example', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  content: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  }
+
+  // The timestamp is added automatically by Sequelize
+  // http://docs.sequelizejs.com/manual/tutorial/models-definition.html#timestamps
+});
+{{/backend.postgreSQL}}

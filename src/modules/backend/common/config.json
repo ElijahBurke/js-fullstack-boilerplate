@@ -1,0 +1,68 @@
+[
+  {
+    "file_name": ".gitignore",
+    "name": "gitignore",
+    "path": [],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "file_name": "package.json",
+    "name": "package.json.mustache",
+    "path": [],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "README.md",
+    "name": "README.md",
+    "path": [],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "file_name": "config.js",
+    "name": "config.js.mustache",
+    "path": [],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "index.js",
+    "name": "index.js.mustache",
+    "path": [],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "index.js",
+    "name": "index.router.js.mustache",
+    "path": ["routers"],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "index.js",
+    "name": "index.controller.js.mustache",
+    "path": ["controllers"],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "index.js",
+    "name": "index.model.js.mustache",
+    "path": ["models"],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "example.js",
+    "name": "example.model.js.mustache",
+    "path": [
+      "models"
+    ],
+    "template": true,
+    "dependencies": []
+  }
+]
+
