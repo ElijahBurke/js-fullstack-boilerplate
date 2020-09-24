@@ -2,7 +2,7 @@
 
 {{#backend.express}}
 const router = require('express').Router();
-const example = require('./controllers');
+const example = require('../controllers');
 
 //write all the routes needed here, can split into different files
 
@@ -14,7 +14,7 @@ router.post('/example', example.postExample);
 {{#backend.koa}}
 const Router = require('koa-router');
 const router = new Router();
-const example = require('./controllers');
+const example = require('../controllers');
 
 //write all the routes needed here, can split into different files
 

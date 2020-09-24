@@ -107,7 +107,7 @@ const example = require('../models');
     }
   };
 
-  export.postExample = async (ctx) => {
+  exports.postExample = async (ctx) => {
     try {
       const newExmpl = example.create(ctx.request.body);
       ctx.status = 201;

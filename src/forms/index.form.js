@@ -26,13 +26,13 @@ module.exports = [
   {
     type: 'list',
     name: 'license',
-    message: 'License (ISC): ',
+    message: 'License: ',
     choices: ['ISC', 'MIT', 'UNLICENSED']
   },
   {
-    type: 'list',
+    type: 'confirm',
     name: 'private',
     message: 'Private: ',
-    choices: ['true', 'false'],
+    default: true
   }
 ];
