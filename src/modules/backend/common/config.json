@@ -1,0 +1,20 @@
+[
+  {
+    "name": "gitignore",
+    "path": [],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "name": "package.json",
+    "path": [],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "name": "README.md",
+    "path": [],
+    "template": false,
+    "dependencies": []
+  }
+]

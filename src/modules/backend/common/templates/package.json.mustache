@@ -1,0 +1,50 @@
+{
+  "name": "{{ name }}",
+  "version": "{{ version }}",
+  "description": "{{ description_backend }}",
+  "main": "src/index.js",
+  "author": "{{ author }}",
+  "license": "{{ license }}",
+  "private": "{{ private }}",
+  "scripts": {
+    "start": "node backend/index.js",
+    "dev": "nodemon backend/index.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "node",
+    "mongodb",
+    "mongoose",
+    "sequelize",
+    "postgreSQL"
+  ],
+  "dependencies": {
+    "boom": "^7.3.0",
+    "chalk": "^3.0.0",
+    "good": "^8.1.2",
+    "good-console": "^8.0.0",
+    "good-squeeze": "^5.1.0",
+    "inert": "^5.1.3",
+    {{#mongodb}}
+    "mongoose": "^5.8.1",
+    {{/mongodb}}
+    {{#mysql}}
+    "mysql": "^2.17.1",
+    {{/mysql}}
+    {{#postgresql}}
+    "pg": "^7.14.0",
+    {{/postgresql}}
+    {{#websockets}}
+    "socket.io": "^2.3.0",
+    {{/websockets}}
+    "vision": "^5.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "jest": "^24.9.0"
+  },
+  "engines": {
+    "node": ">=13.x.x",
+    "npm": ">=6.x.x"
+  }
+}

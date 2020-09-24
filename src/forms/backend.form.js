@@ -11,7 +11,7 @@ module.exports = [
     type: 'list',
     name: 'backend_type',
     message: 'Select Backend Framework: ',
-    choices: ['express', 'koa', 'graphQL'],
+    choices: ['express', 'koa'],
   },
   {
     type: 'list',

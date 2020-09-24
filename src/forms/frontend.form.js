@@ -33,13 +33,13 @@ module.exports = [
     type: 'confirm',
     name: 'routing',
     message: 'Would you like to use Routing (Y/n)?',
-    default: 'yes'
+    default: 'true'
   },
   {
     type: 'confirm',
     name: 'helmet',
     message: 'Would you like to use React-helmet (Y/n)?',
-    default: 'yes'
+    default: 'true'
   },
   {
     type: 'list',
@@ -51,13 +51,13 @@ module.exports = [
     type: 'confirm',
     name: 'storybook',
     message: 'Would you like to use Storybook (Y/n)?',
-    default: 'yes'
+    default: 'true'
   },
   {
     type: 'confirm',
     name: 'documentation',
     message: 'Create App Documentation with Docz (Y/n)?',
-    default: 'yes'
+    default: 'true'
   }
 ];
 
