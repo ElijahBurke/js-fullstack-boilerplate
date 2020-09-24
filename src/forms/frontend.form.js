@@ -21,13 +21,13 @@ module.exports = [
     type: 'list',
     name: 'style_system',
     message: 'Select styling option: ',
-    choices: ['None', 'Styled-components', 'Sass', 'Less', 'css'],
+    choices: ['none', 'styled-components', 'sass', 'less', 'css'],
   },
   {
     type: 'list',
     name: 'state_management',
     message: 'Select State Management Method: ',
-    choices: ['React-redux', 'React-Query', 'React Context API'],
+    choices: ['react-redux', 'react-Query', 'react-context'],
   },
   {
     type: 'confirm',
@@ -45,7 +45,7 @@ module.exports = [
     type: 'list',
     name: 'testing',
     message: 'Testing Library?',
-    choices: ['Jest', 'Mocha', 'Cypress']
+    choices: ['jest', 'mocha', 'cypress']
   },
   {
     type: 'confirm',

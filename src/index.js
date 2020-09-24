@@ -3,13 +3,15 @@ const inquirer = require('inquirer');
 var shell = require('shelljs');
 const fs = require('fs');
 
-const configForm = require('./forms/index.form');
+const commonForm = require('./forms/index.form');
 const frontendForm = require('./forms/frontend.form');
 const backendForm = require('./forms/backend.form');
 const createFile = require('./utils/tools/fileWriter');
 
-//generate function for frontend folder structure
 
+
+
+//generate frontend folder structure || frontend with create-react-app
 // generate function for backend folder structure
 
 async function generateBackEnd(appFolderName, backendConfig) {
@@ -21,36 +23,66 @@ async function generateBackEnd(appFolderName, backendConfig) {
   await shell.cd(`..`);
 }
 
-// generate function of entire app folder structure
-async function generateFullStackApp(appName) {
+//run the forms in the terminal 
 
+async function userForms() {
   let options = {
     frontend: {},
     backend: {},
     common: {}
   };
 
-  // eslint-disable-next-line no-unused-vars
-  await shell.exec(`mkdir ${appName}`);
-  await shell.cd(`${appName}`)
-
-  const configAnswers = await inquirer.prompt(configForm);
-  options.common = configAnswers;
-
-  const frontendAnswers = await inquirer.prompt(frontendForm);
-  options.frontend = frontendAnswers;
+  try {
+    const common = await inquirer.prompt(commonForm);
+    common.app_name.toLowerCase().split('').join('-');
+    options.common = common;
   
-  const backendAnswers = await inquirer.prompt(backendForm);
-  options.backend = backendAnswers;
+    const frontend = await inquirer.prompt(frontendForm);
+    options.frontend = frontend;
+  
+    const backend = await inquirer.prompt(backendForm);
+    options.backend = backend;
+    return options;
+  } catch (e) {
+    console.log(e);
+    return new Error(`Error running the forms, ${e}`);
+  }
 
-  await shell.exec(`mkdir backend client config`)
-  // await shell.exec(`touch package.json readme.md ./config/fsAppConfig.js`);
-  // await generateBackEnd(options.common.app_name, options.backend);
-  const types = ['common'];
 
-  types.forEach(type => require(`./modules/${type}/common/config.json`).forEach(file => {
-    createFile(options, file, ['modules', type, 'common', 'templates'], type);
-  }));
+
+}
+// start the app generation process
+
+
+async function createDirectories(appName) {
+  try {
+    await shell.exec(`mkdir ${appName}`);
+    await shell.cd(`${appName}`)
+    await shell.exec(`mkdir backend client config`)
+  } catch (e) {
+    console.log(e);
+  }
+}
+// generate function of entire app folder structure
+async function generateFullStackApp(appName) {
+  try {
+    await createDirectories(appName);
+
+    const answers = await userForms();
+    const types = ['common']; //add frontend when ready
+    types.forEach(type => require(`./modules/${type}/common/config.json`).forEach(file => {
+      createFile(answers, file, ['modules', type, 'common', 'templates'], type);
+    }));
+
+  } catch (e) {
+    console.log(e);
+    throw new Error(`Error creating the directory, ${e}`);
+  }
+
+  // missing the creation of the dependencies in the package.json for backend and frontend
+  // check what dependencies needs installing from each config file and then run shell cd to navigate in the folder and then run exec npm install
+
+  // check if git init should also run
 }
 
 module.exports = {

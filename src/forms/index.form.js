@@ -4,7 +4,7 @@ module.exports = [
   {
     name: 'app_name',
     message: 'Input Application name (frontend and backend)',
-    default: 'JS-fullStack-app'
+    default: 'js-fullstack-app'
   },
   {
     name: 'version',
@@ -24,13 +24,10 @@ module.exports = [
     message: 'Author: '
   },
   {
-    name: 'email',
-    message: 'Email: '
-  },
-  {
+    type: 'list',
     name: 'license',
     message: 'License (ISC): ',
-    default: 'ISC'
+    choices: ['ISC', 'MIT', 'UNLICENSED']
   },
   {
     type: 'list',

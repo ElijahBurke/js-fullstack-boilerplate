@@ -31,7 +31,6 @@ const createFile = (options, file, path, type) => {
         console.log(`cannot write file, ${error}`);
       }
     });
-    
   } else {
     copyFileSync(from, to);
   }
