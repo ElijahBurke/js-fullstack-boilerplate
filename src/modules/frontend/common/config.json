@@ -1,0 +1,30 @@
+[
+  {
+    "file_name": "package.json",
+    "name": "package.json.mustache",
+    "path": [],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": ".gitignore",
+    "name": "gitignore",
+    "path": [],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "file_name": "README.md",
+    "name": "README.md.mustache",
+    "path": [],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": ".babelrc",
+    "name": "babelrc",
+    "path": [],
+    "template": false,
+    "dependencies": []
+  }
+]

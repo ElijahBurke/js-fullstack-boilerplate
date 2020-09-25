@@ -11,26 +11,29 @@ const installBackForm = require('../../forms/install.backend.form');
 
 const createFile = require('../tools/fileWriter');
 
+const { log } = require('../tools/logger');
+
 // generate function for backend or frontend in folder structure
 async function generateSubfolders(appFolderName, environment) {
   try {
     if (environment === 'backend') {
       await shell.cd(`${appFolderName}_${environment}`);
-      shell.echo('');
-      shell.echo('Creating Backend folder structure');
-      await shell.exec(`mkdir controllers routers models`);
-      shell.echo('Backend folder structure created');
-      shell.echo('');
+       
+      log('Creating Backend folder structure', 'working');
+      await shell.exec('mkdir controllers routers models');
+      log('Backend folder structure created', 'success');
+       
       await shell.cd(`..`);
     } else if (environment === 'frontend') {
-      shell.echo('');
-      shell.echo('Creating Frontend folder structure');
-      shell.echo('Creating frontend using create-react-app');
-      await shell.exec(`npx create-react-app  ${appFolderName}_client`);
-      shell.echo('Frontend folder structure created');
-      shell.echo('');
+       
+      log('Creating Frontend folder structure', 'working');
+      await shell.exec(`npx create-react-app  ${appFolderName}_client`)
+      // await shell.cd(`${appFolderName}_client/src`);
+      // await shell.exec('mkdir Components Containers store utils');
+      log('Frontend folder structure created', 'success');
     }
   } catch (e) {
+    log(`Error Generating ${environment} subfolders`, 'error');
     throw new Error(e);
   }
 }
@@ -39,13 +42,13 @@ async function generateSubfolders(appFolderName, environment) {
 
 const createDirectories = async (appName) => {
   try {
-    await shell.exec(`mkdir ${appName}`);
-    await shell.cd(`${appName}`)
-    await shell.exec(`mkdir ${appName}_backend config`)
-    shell.echo('')
+    await shell.cd(`${appName}`);
+    await shell.exec(`mkdir ${appName}_backend config ${appName}_client`); 
     await generateSubfolders(appName, 'backend');
     await generateSubfolders(appName, 'frontend');
+
   } catch (e) {
+    log(`Error Generating ${appName} directories`, 'error');
     throw new Error(e);
   }
 }
@@ -61,27 +64,25 @@ async function userForms(appName) {
   };
 
   try {
-    shell.echo(' ------ Set up the common App ------ ');
-    shell.echo('');
+    log('Package.json info required', 'attention');
     const common = await inquirer.prompt(commonForm);
     common.app_name.toLowerCase().split('').join('-');
     options.common = common;
 
-    shell.echo('');
-    shell.echo(' ------ Set up the frontend of the App ------ ');
-    shell.echo('');
+    log('Frontend information required', 'attention');
+     
     const frontend = await inquirer.prompt(frontendForm);
     options.frontend = frontend;
 
-    shell.echo('');
-    shell.echo(' ------ Set up the backend of the App ------ ');
-    shell.echo('');
+    log('Backend information required', 'attention');
+     
     const backend = await inquirer.prompt(backendForm);
     options.backend = backend;
 
     return options;
 
   } catch (e) {
+    log('Error while running the configuration forms', 'error');
     throw new Error(e);
   }
 }
@@ -90,19 +91,17 @@ async function userForms(appName) {
 
 const initGitFiles = async (appName, environment) => {
   try {
-    shell.echo('');
-    shell.echo(` ------ Initialising git for ${environment} ------ `);
-    shell.echo('');
+     
+    log(`Initialising git for ${environment}`, 'working');
 
     await shell.cd(`${appName}_${environment === 'frontend' ? 'client' : environment}`);
     await shell.exec(`git init`);
 
-    shell.echo('');
-    shell.echo(` ------ ${environment} git initialised ------ `);
-    shell.echo('');
-
+    log(`${environment} git initialised`, 'success');
     await shell.cd(`..`);
+
   } catch (e) {
+    log('Could not initialise Git', 'error');
     throw new Error(`could not initialise git, ${e}`);
   }
 }
@@ -110,19 +109,17 @@ const initGitFiles = async (appName, environment) => {
 // install dependencies for selected environment
 const installDependencies = async (appName, environment) => {
   try {
-    shell.echo('');
-    shell.echo(` ------ Installing ${environment} ------ `);
-    shell.echo('');
+    log(`Installing ${environment}`, 'working');
 
     await shell.cd(`${appName}_${environment === 'frontend' ? 'client' : environment}`);
     await shell.exec(`npm i`);
 
-    shell.echo('');
-    shell.echo(` ------ ${environment} installed ------ `);
-    shell.echo('');
+    log(`${environment} installed`, 'success');
     await shell.cd(`..`);
+
   } catch (e) {
-    throw new Error(`could not install dependencies, ${e}`);
+    log(`Error while loading the dependencies`, 'error');
+    throw new Error();
   }
 }
 // generate function of entire app folder structure
@@ -130,54 +127,50 @@ async function buildFullStackApp(appName) {
   const requiredDep = ['git', 'npm', 'npx'];
 
   requiredDep.forEach(dep => {
+    shell.which(dep);
     if (!shell.which(dep)) {
-      shell.echo(`Sorry, this script requires ${dep}`);
+       log(`Sorry, this script requires ${dep}`, 'error');
       shell.exit(1);
     }
   });
 
-  const types = ['common', 'backend']; //add frontend when ready
+  const types = ['common', 'backend']; 
+
   try {
-    shell.echo('');
-    shell.echo(' ------ Creating Root Folder ------ ');
-    shell.echo('');
-
+    
+    await shell.mkdir(`${appName}`);
+    log('Root folder created', 'success');
     await createDirectories(appName);
-
-    shell.echo('');
-    shell.echo(' ------ Root folder created ------ ');
-    shell.echo('');
-
+    log('Subfolders created', 'success');
+    
     const answers = await userForms(appName);
+    log('Configuration info completed', 'success');
 
-    shell.echo('');
-    shell.echo(' ------ Files generation in progress ------ ');
-    shell.echo('');
-
-    types.forEach(type => require(`../..//modules/${type}/common/config.json`).forEach(file => {
+    log('Files generation in progress', 'working');
+    types.forEach(type => require(`../../modules/${type}/common/config.json`).forEach(file => {
       createFile(answers, file, ['modules', type, 'common', 'templates'], type);
     }));
 
-    shell.echo('');
-    shell.echo(' ------ Files generation completed, happy coding! ------ ');
-    shell.echo('');
-
+    log('Files generation completed', 'success');
+     
   } catch (e) {
-    throw new Error(`Error creating the directory, ${e}`);
+    log('Error creating the directory', 'error')
+    throw new Error(e);
   }
   //install frontend git and dependencies
   try {
+    log('Git and install info required - Frontend', 'attention');
     await inquirer.prompt(installFrontForm).then(async ans => {
       if (ans.git) {
         await initGitFiles(appName, 'frontend');
       } else {
-        shell.echo(' ------ Skipping frontend Git Init ------ ');
+        log('Skipping frontend Git Init', 'warning');
       }
 
       if (ans.install) {
         await installDependencies(appName, 'frontend');
       } else {
-        shell.echo(` ------ Skipping frontend installation ------ `);
+        log(`Skipping frontend installation`, 'warning');
       }
     });
   } catch (e) {
@@ -185,22 +178,26 @@ async function buildFullStackApp(appName) {
   }
   //install backend git and dependencies
   try {
+    log('Git and install info required - Backend', 'attention')
     await inquirer.prompt(installBackForm).then(async ans => {
       if (ans.git) {
         await initGitFiles(appName, 'backend');
       } else {
-        shell.echo(' ------ Skipping backend Git Init ------ ');
+         log('Skipping backend Git Init', 'warning');
       }
 
       if (ans.install) {
         await installDependencies(appName, 'backend');
       } else {
-        shell.echo(` ------ Skipping backend installation ------ `);
+        log(`Skipping backend installation`, 'warning');
       }
     });
   } catch (e) {
+    log('Error while configuring the backend', 'error')
     throw new Error(e)
   }
+
+  log('🚀🚀🚀 Set up completed!! 🚀🚀🚀', 'finish')
 }
 
 module.exports = buildFullStackApp;

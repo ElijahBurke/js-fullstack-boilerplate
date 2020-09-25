@@ -1,8 +1,9 @@
 const shell = require('shelljs');
 const fs = require('fs');
+const { log } = require('../tools/logger');
 
 const generateReactComponent = (type, name) => {
-  console.log(`this will generate a ${type}, named ${name}`)
+  log(`this will generate a ${type}, named ${name}`, 'info')
 }
 
 

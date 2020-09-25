@@ -1,0 +1,27 @@
+[
+  {
+    "file_name": "index.js",
+    "name": "index.js.mustache",
+    "path": ["src"],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "file_name": "App.js",
+    "name": "App.js.mustache",
+    "path": [
+      "src"
+    ],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "file_name": "App.css",
+    "name": "App.css.mustache",
+    "path": [
+      "src"
+    ],
+    "template": false,
+    "dependencies": []
+  }
+]
