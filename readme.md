@@ -7,11 +7,11 @@ This is a Javascript Fullstack CLI to quickly create and manage Javascript-based
 
 to run the module install globally:
 
-  npm i -g fullstack-JS
+npm i -g js-fullstack-boilerplate
 
 to start set up process run in selected root folder:
 
-  fullStackJS
+create-fullstack-app
 
   
 <!-- inquirer -->

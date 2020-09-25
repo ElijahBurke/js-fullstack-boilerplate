@@ -10,7 +10,7 @@ let mergeArgs = '';
 if (args.length > 0) {
   mergeArgs = args.map((arg) => arg.toLowerCase()).join('_');
 } else {
-  mergeArgs = 'fullstack_app_JS';
+  mergeArgs = 'fullstack_app_js';
 }
 
-generateApp.generateFullStackApp(mergeArgs);
+generateApp.buildFullStackApp(mergeArgs);
