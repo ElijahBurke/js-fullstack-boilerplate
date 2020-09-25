@@ -1,17 +1,77 @@
 {
-  "name": "{{ common.app_name }}_backend",
-  "version": "{{ common.version }}",
-  "description": "{{ common.description_frontend }}",
-  "main": "index.js",
-  "author": "{{ common.author }}",
-  "license": "{{ common.license }}",
-  "private": "{{ common.private }}",
+  "name": "test_template",
+  "version": "{{ common.version}}",
+  "author": "{{ common.author}}",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.4",
+    "@testing-library/user-event": "^12.1.4",
+    "eslint-plugin-react": "^7.21.12",
+    "husky": "^4.3.0",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3",
+    "web-vitals": "^0.2.4",
+    {{#frontend.redux}}
+    "react-redux": "^7.2.1",
+    {{/frontend.redux}}
+    {{#frontend.query}}
+    "react-query": "^2.23.0",
+    {{/frontend.query}}
+    {{#frontend.mobx}}
+    "mobx": "^5.15.7",
+    {{/frontend.mobx}}
+    {{#frontend.styled}}
+    {{/frontend.styled}}
+    {{#frontend.css}}
+    {{/frontend.css}}
+    {{#frontend.scss}}
+    {{/frontend.scss}}
+    {{#frontend.less}}
+    {{/frontend.less}}
+    {{#frontend.routing}}
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    {{/frontend.routing}}
+    {{#frontend.helmet}}
+    "react-helmet": "^6.1.0",
+    {{/frontend.helmet}}
+    {{#frontend.docz}}
+      "docz": "^2.3.1",
+    {{/frontend.docz}}
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "eslint": "^7.9.0",
+    "eslint-plugin-react": "^7.21.12",
+  },
   "scripts": {
-    "start": "webpack-dev-server --mode=development --open --hot",
-    "build": "webpack --mode=production"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "pre-commit": "pretty-quick --staged",
+    "coverage": "npm test -- --coverage --watchAll=false",
+    {{#frontend.docz}}
+      "docz:dev": "docz dev",
+      "docz:build": "docz build",
+      "docz:serve": "docz build && docz serve"
+    {{/frontend.docz}}
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ]
   },
   "browserslist": {
     "production": [
@@ -24,46 +84,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "keywords": [
-    "react",
-    "redux",
-    "styled-components"
-  ],
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    react-hot-loader@4.3.11,
-    {{#frontend.redux}}
-    {{/frontend.redux}}
-    {{#frontend.redux}}
-    {{/frontend.redux}}
-    {{#frontend.query}}
-    {{/frontend.query}}
-    {{#frontend.contextAPI}}
-    {{/frontend.contextAPI}}
-  },
-  "devDependencies": {
-    "eslint": "^6.7.2",
-    "jest": "^24.9.0",
-    @babel/core@7.1.0,
-    @babel/cli@7.1.0,
-    @babel/preset-env@7.1.0,
-    @babel/preset-react@7.0.0,
-    webpack@4.19.1,
-    webpack-cli@3.1.1,
-    webpack-dev-server@3.1.8,
-    style-loader@0.23.0,
-    css-loader@1.0.0,
-    babel-loader@8.0.2,
-
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
   }
 }
+
+    
