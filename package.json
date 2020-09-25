@@ -9,7 +9,9 @@
     "test": "mocha"
   },
   "bin": {
-    "create-fullstack-app": "./bin/createApp.js"
+    "create-fullstack-app": "./bin/createApp.js",
+    "rg": "./bin/generateReactComponent.js",
+    "bg": "./bin/generateBackendComponent.js"
   },
   "preferGlobal": true,
   "repository": {
