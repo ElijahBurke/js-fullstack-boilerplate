@@ -19,10 +19,20 @@ const { log } = require('../tools/logger');
 const generateFrontend = async (appName) => {
   log('Initialising frontend', 'working');
 
-  shell.exec(
-    `npx create-react-app ${appName}_client --template js-fullstack-app-frontend`,
-    { async: true }
-  );
+  await new Promise((resolve, reject) => {
+    shell.exec(
+      `npx create-react-app ${appName}_client --template js-fullstack-app-frontend`, function (
+        error
+      ) {
+      if (error) {
+        console.log('exec error: ' + error);
+        // Reject if there is an error:
+        return reject(error);
+      }
+      // Otherwise resolve the promise:
+      resolve();
+    });
+  });
 
   log('Frontend initialised correctly', 'success');
   log('');
@@ -188,7 +198,6 @@ async function buildFullStackApp(appName) {
       } else {
         log('Skipping backend Git Init', 'warning');
       }
-
       if (ans.install) {
         await installDependencies(appName, 'backend');
       } else {
@@ -204,12 +213,23 @@ async function buildFullStackApp(appName) {
     try {
       process.chdir(`${appName}_client`);
       log('Storybook set up in progress', 'working');
-      shell.exec('npx sb init', { async: true });
+      await new Promise((resolve, reject) => {
+        shell.exec(
+          `npx sb init`, function (
+            error
+          ) {
+          if (error) {
+            console.log('exec error: ' + error);
+            // Reject if there is an error:
+            return reject(error);
+          }
+          // Otherwise resolve the promise:
+          resolve();
+        });
+      });
+
       log('Storybook initialised', 'success');
-      log(
-        'run storybook using "npm run storybook" in client root folder',
-        'info'
-      );
+      log('run storybook using "npm run storybook" in client root folder','info');
       process.chdir(`..`);
     } catch (e) {
       log('Error initialising storybook', 'error');
