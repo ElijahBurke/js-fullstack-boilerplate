@@ -22,7 +22,7 @@ module.exports = [
     name: 'style_system',
     message: 'Select styling option: ',
     default: 'none',
-    choices: ['none', 'styled-components', 'sass', 'less', 'css'],
+    choices: ['none', 'styled-components', 'sass', 'css'],
   },
   {
     type: 'list',

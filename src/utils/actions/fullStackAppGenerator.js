@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 const inquirer = require('inquirer');
 const shell = require('shelljs');
-const fs = require('fs');
 const process = require('process');
 
 const commonForm = require('../../forms/index.form');
@@ -9,42 +7,162 @@ const frontendForm = require('../../forms/frontend.form');
 const backendForm = require('../../forms/backend.form');
 const installFrontForm = require('../../forms/install.frontend.form');
 const installBackForm = require('../../forms/install.backend.form');
-
+const fileEditor = require('../tools/fileEditor');
 const createFile = require('../tools/fileWriter');
 
 const { log } = require('../tools/logger');
 
-//generate frontend
+// install and git init
+const initGitFiles = async (appName, environment) => {
+  try {
+    log(`Initialising git for ${environment}`, 'working');
+    process.chdir(
+      `${environment === 'frontend'
+        ? `${appName}_client`
+        : `${appName}_${environment}`
+      }`
+    );
+    await shell.exec(`git init`);
+    log(`${environment} git initialised`, 'success');
+    process.chdir(`..`);
+  } catch (e) {
+    log('Could not initialise Git', 'error');
+    throw new Error(`could not initialise git, ${e}`);
+  }
+};
+
+const installDependencies = async (appName, environment) => {
+  try {
+    log(`Installing ${environment}`, 'working');
+    process.chdir(
+      `${environment === 'frontend'
+        ? `${appName}_client`
+        : `${appName}_${environment}`
+      }`
+    );
+    await shell.exec(`npm i`);
+    log(`${environment} installed`, 'success');
+    process.chdir(`..`);
+  } catch (e) {
+    log(`Error while loading the dependencies`, 'error');
+    throw new Error();
+  }
+};
+
+const installAndGit = async (appName, environment) => {
+  try {
+    if (environment === 'frontend') {
+      log('npm install Frontend?', 'attention');
+      await inquirer.prompt(installFrontForm).then(async (ans) => {
+        if (ans.install) {
+          await installDependencies(appName, 'frontend');
+        } else {
+          log(`Skipping frontend installation`, 'warning');
+        }
+      });
+    } else if (environment === 'backend') {
+      log('Git and install info required - Backend', 'attention');
+      await inquirer.prompt(installBackForm).then(async (ans) => {
+        if (ans.git) {
+          await initGitFiles(appName, 'backend');
+        } else {
+          log('Skipping backend Git Init', 'warning');
+        }
+        if (ans.install) {
+          await installDependencies(appName, 'backend');
+        } else {
+          log(`Skipping backend installation`, 'warning');
+        }
+      });
+    }
+  } catch (e) {
+    log(`Error installing ${environment}`, 'error');
+    throw new Error(e);
+  }
+}
+//add required dependencies
+
+const addDependencies = async (appName, options) => {
+  try {
+    await fileEditor(appName, options);
+  } catch (e) {
+    log('Error writing dependencies in frontend', 'error');
+    throw new Error(e);
+  }
+}
+
+//init Storybook 
+const initStorybook = async (appName) => {
+  try {
+    process.chdir(`${appName}_client`);
+    log('Storybook set up in progress', 'working');
+    await new Promise((resolve, reject) => {
+      shell.exec(
+        `npx sb init`, function (
+          error
+        ) {
+        if (error) {
+          console.log('exec error: ' + error);
+          // Reject if there is an error:
+          return reject(error);
+        }
+        // Otherwise resolve the promise:
+        resolve();
+      });
+    });
+
+    log('Storybook initialised', 'success');
+    log('run storybook using "npm run storybook" in client root folder', 'info');
+    process.chdir(`..`);
+  } catch (e) {
+    log('Error initialising storybook', 'error');
+    throw new Error(e);
+  }
+}
+
+// write files in directories
+
+const writeNewFiles = async (options) => {
+  const types = ['common', 'backend', 'frontend'];
+  try {
+    await types.forEach((type) =>
+      require(`../../modules/${type}/common/config.json`).forEach(async (file) => {
+        await createFile(
+          options,
+          file,
+          ['modules', type, 'common', 'templates'],
+          type
+        );
+      })
+    );
+  } catch (e) {
+    log('Error writing files', 'error');
+    throw new Error(e)
+  }
+}
+
+// generate frontend
 
 const generateFrontend = async (appName) => {
   log('Initialising frontend', 'working');
 
-  shell.exec(
-    `npx create-react-app ${appName}_client --template js-fullstack-app-frontend`,
-    { async: true }
-  );
-
+  await new Promise((resolve, reject) => {
+    shell.exec(
+      `npx create-react-app ${appName}_client --template js-fullstack-app-frontend`, function (error) {
+        if (error) {
+          console.log('exec error: ' + error);
+          return reject(error);
+        }
+        resolve();
+      });
+  });
   log('Frontend initialised correctly', 'success');
   log('');
 };
 
-// start the app generation process
+// run forms
 
-const createDirectories = async (appName) => {
-  try {
-    process.chdir(`${appName}`);
-    console.log('New directory: ' + process.cwd());
-    await shell.exec(`mkdir ${appName}_backend config`);
-    // await generateSubfolders(appName, 'backend');
-  } catch (e) {
-    log(`Error Generating ${appName} directories`, 'error');
-    throw new Error(e);
-  }
-};
-
-//run the forms in the terminal
-
-async function userForms(appName) {
+const userForms = async (appName) => {
   let options = {
     app_name: appName,
     frontend: {},
@@ -54,6 +172,7 @@ async function userForms(appName) {
 
   try {
     log('Package.json information required', 'attention');
+
     const common = await inquirer.prompt(commonForm);
     common.app_name.toLowerCase().split('').join('-');
     options.common = common;
@@ -69,59 +188,30 @@ async function userForms(appName) {
     options.backend = backend;
 
     return options;
+
   } catch (e) {
     log('Error while running the configuration forms', 'error');
     throw new Error(e);
   }
 }
 
-//install git for selected environment
+//create root
 
-const initGitFiles = async (appName, environment) => {
+const createDirectories = async (appName) => {
   try {
-    log(`Initialising git for ${environment}`, 'working');
-
-    process.chdir(
-      `${
-        environment === 'frontend'
-          ? `${appName}_client`
-          : `${appName}_${environment}`
-      }`
-    );
-    console.log('New directory: ' + process.cwd());
-    await shell.exec(`git init`);
-
-    log(`${environment} git initialised`, 'success');
-    process.chdir(`..`);
+    process.chdir(`${appName}`);
+    await shell.exec(`mkdir ${appName}_backend config`);
   } catch (e) {
-    log('Could not initialise Git', 'error');
-    throw new Error(`could not initialise git, ${e}`);
+    log(`Error Generating ${appName} directory`, 'error');
+    throw new Error(e);
   }
 };
 
-// install dependencies for selected environment
-const installDependencies = async (appName, environment) => {
-  try {
-    log(`Installing ${environment}`, 'working');
-
-    process.chdir(
-      `${
-        environment === 'frontend'
-          ? `${appName}_client`
-          : `${appName}_${environment}`
-      }`
-    );
-    await shell.exec(`npm i`);
-
-    log(`${environment} installed`, 'success');
-    process.chdir(`..`);
-  } catch (e) {
-    log(`Error while loading the dependencies`, 'error');
-    throw new Error();
-  }
-};
-// generate function of entire app folder structure
+//entry point to start writing the files
 async function buildFullStackApp(appName) {
+
+  //check presence of dependencies
+
   const requiredDep = ['git', 'npm', 'npx'];
 
   requiredDep.forEach((dep) => {
@@ -132,91 +222,48 @@ async function buildFullStackApp(appName) {
     }
   });
 
-  const types = ['common', 'backend'];
   let answers = null;
+
   try {
     shell.mkdir(`${appName}`);
     log('Root folder created', 'success');
-    await createDirectories(appName);
-
-    answers = await userForms(appName);
-    log('Configuration info completed', 'success');
-
-    log('Files generation in progress', 'working');
-
-    types.forEach((type) =>
-      require(`../../modules/${type}/common/config.json`).forEach((file) => {
-        createFile(
-          answers,
-          file,
-          ['modules', type, 'common', 'templates'],
-          type
-        );
-      })
-    );
-    // frontend generation
-    await generateFrontend(appName);
-
-    // frontend update files
-
-    log('Files generation completed', 'success');
   } catch (e) {
-    log('Error creating the directory', 'error');
+    log(`${e}`, 'error');
     throw new Error(e);
   }
 
-  //install frontend git and dependencies
-  try {
-    log('npm install Frontend?', 'attention');
-    await inquirer.prompt(installFrontForm).then(async (ans) => {
-      if (ans.install) {
-        await installDependencies(appName, 'frontend');
-      } else {
-        log(`Skipping frontend installation`, 'warning');
-      }
-    });
-  } catch (e) {
-    log(`Error installing frontend`, 'error');
-    throw new Error(e);
-  }
-  //install backend git and dependencies
-  try {
-    log('Git and install info required - Backend', 'attention');
-    await inquirer.prompt(installBackForm).then(async (ans) => {
-      if (ans.git) {
-        await initGitFiles(appName, 'backend');
-      } else {
-        log('Skipping backend Git Init', 'warning');
-      }
+  await createDirectories(appName);
 
-      if (ans.install) {
-        await installDependencies(appName, 'backend');
-      } else {
-        log(`Skipping backend installation`, 'warning');
-      }
-    });
-  } catch (e) {
-    log('Error while installing the backend', 'error');
-    throw new Error(e);
-  }
-  // install storybook if required
+  // get app requirements
+
+  answers = await userForms(appName);
+
+  log('Configuration info completed', 'success');
+
+  //generate the frontend
+
+  await generateFrontend(appName);
+
+  // write files in common backend and frontend
+
+  log('Files generation in progress', 'working');
+
+  await writeNewFiles(answers);
+
+  // install extra dependencies depending on options
+  await addDependencies(appName, answers.frontend);
+  log('Files generation completed', 'success');
+
+  // initiate storybook if needed
   if (answers.frontend.storybook) {
-    try {
-      process.chdir(`${appName}_client`);
-      log('Storybook set up in progress', 'working');
-      shell.exec('npx sb init', { async: true });
-      log('Storybook initialised', 'success');
-      log(
-        'run storybook using "npm run storybook" in client root folder',
-        'info'
-      );
-      process.chdir(`..`);
-    } catch (e) {
-      log('Error initialising storybook', 'error');
-      throw new Error(e);
-    }
+    await initStorybook(appName);
   }
+
+  // git and install
+  await installAndGit(appName, 'frontend');
+  await installAndGit(appName, 'backend');
+
   log('🚀🚀🚀 Set up completed!! 🚀🚀🚀', 'finish');
-}
+};
 
 module.exports = buildFullStackApp;

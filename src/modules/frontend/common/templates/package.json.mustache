@@ -1,7 +1,7 @@
 {
-  "name": "test_template",
-  "version": "{{ common.version}}",
-  "author": "{{ common.author}}",
+  "name": "{{ common.app_name }}-client",
+  "version": "{{ common.version }}",
+  "author": "{{ common.author }}",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -15,33 +15,6 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
     "web-vitals": "^0.2.4",
-    {{#frontend.redux}}
-    "react-redux": "^7.2.1",
-    {{/frontend.redux}}
-    {{#frontend.query}}
-    "react-query": "^2.23.0",
-    {{/frontend.query}}
-    {{#frontend.mobx}}
-    "mobx": "^5.15.7",
-    {{/frontend.mobx}}
-    {{#frontend.styled}}
-    {{/frontend.styled}}
-    {{#frontend.css}}
-    {{/frontend.css}}
-    {{#frontend.scss}}
-    {{/frontend.scss}}
-    {{#frontend.less}}
-    {{/frontend.less}}
-    {{#frontend.routing}}
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    {{/frontend.routing}}
-    {{#frontend.helmet}}
-    "react-helmet": "^6.1.0",
-    {{/frontend.helmet}}
-    {{#frontend.docz}}
-      "docz": "^2.3.1",
-    {{/frontend.docz}}
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
@@ -58,11 +31,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "pre-commit": "pretty-quick --staged",
-    "coverage": "npm test -- --coverage --watchAll=false",
+    "coverage": "npm test -- --coverage --watchAll=false"{{#frontend.docz}} , {{/frontend.docz}}
     {{#frontend.docz}}
-      "docz:dev": "docz dev",
-      "docz:build": "docz build",
-      "docz:serve": "docz build && docz serve"
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
+    "docz:serve": "docz build && docz serve"
     {{/frontend.docz}}
   },
   "eslintConfig": {
