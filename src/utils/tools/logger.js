@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 
-module.exports.highlight = (message, expression = '') => message
-  .replace(expression, chalk.bold.whiteBright(expression));
+module.exports.highlight = (message, expression = '') =>
+  message.replace(expression, chalk.bold.whiteBright(expression));
 
 module.exports.log = (message = '', status = null) => {
   let icon = '';

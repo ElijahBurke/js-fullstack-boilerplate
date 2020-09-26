@@ -4,35 +4,35 @@ module.exports = [
   {
     name: 'app_name',
     message: 'Input Application name (frontend and backend)',
-    default: 'js-fullstack-app'
+    default: 'js-fullstack-app',
   },
   {
     name: 'version',
     message: 'Version: ',
-    default: '1.0.0'
+    default: '1.0.0',
   },
   {
     name: 'description_frontend',
-    message: 'Frontend Description:'
+    message: 'Frontend Description:',
   },
   {
     name: 'description_backend',
-    message: 'Backend Description:'
+    message: 'Backend Description:',
   },
   {
     name: 'author',
-    message: 'Author: '
+    message: 'Author: ',
   },
   {
     type: 'list',
     name: 'license',
     message: 'License: ',
-    choices: ['ISC', 'MIT', 'UNLICENSED']
+    choices: ['ISC', 'MIT', 'UNLICENSED'],
   },
   {
     type: 'confirm',
     name: 'private',
     message: 'Private: ',
-    default: true
-  }
+    default: true,
+  },
 ];

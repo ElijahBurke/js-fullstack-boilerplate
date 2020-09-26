@@ -1,4 +1,4 @@
-## NodeJS Backend 
+## NodeJS Backend
 
 Server side of the application
 
@@ -9,4 +9,3 @@ Server side of the application
 ### How to
 
 ### Notes
-
