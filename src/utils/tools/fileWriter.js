@@ -1,8 +1,7 @@
 const Mustache = require('mustache');
 const { resolve, dirname } = require('path');
-const fs = require('fs'); // Or `import fs from "fs";` with ESM
+const fs = require('fs');
 const shell = require('shelljs');
-// const { readFileSync, writeFileSync, copySync } = require('fs-extra');
 const { log } = require('./logger');
 
 const tool = dirname(require.main.filename);
@@ -24,7 +23,8 @@ const createFile = (options, file, path, type) => {
   const toolNew = tool.replace('bin', 'src');
   const from = resolve(toolNew, ...path, file.name);
   let to = resolve(...file.path);
-
+  options.common.app_name = options.common.app_name.split(' ').join('-');
+  console.log(options.common.app_name);
   if (type !== 'common') {
     to = resolve(`${options.app_name}_${type}`, ...file.path);
   }
@@ -32,25 +32,6 @@ const createFile = (options, file, path, type) => {
   if (type === 'frontend') {
     to = resolve(`${options.app_name}_client`, ...file.path);
     console.log(to);
-    // check the styling system
-    if (options.frontend.style_system === 'styled-components') {
-      options.frontend.styled = true;
-    } else if (options.frontend.style_system === 'sass') {
-      options.frontend.scss = true;
-    } else if (options.frontend.style_system === 'less') {
-      options.frontend.less = true;
-    } else if (options.frontend.style_system === 'css') {
-      options.frontend.css = true;
-    }
-
-    //check which state management type is selected
-    if (options.frontend.state_management === 'react-redux') {
-      options.frontend.redux = true;
-    } else if (options.frontend.state_management === 'react-query') {
-      options.frontend.query = true;
-    } else if (options.frontend.state_management === 'mobx') {
-      options.frontend.mobx = true;
-    }
   }
 
   if (type === 'backend') {
