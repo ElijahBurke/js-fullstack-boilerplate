@@ -2,8 +2,7 @@
 
 ## Introduction
 
-This is a Javascript Fullstack CLI to quickly create and manage Javascript-based SPAs and servers. 
-
+This is a Javascript Fullstack CLI to quickly create and manage Javascript-based SPAs and servers.
 
 to run the module install globally:
 
@@ -13,7 +12,6 @@ to start set up process run in selected root folder:
 
 create-fullstack-app
 
-  
 <!-- inquirer -->
 
 <!-- install command here -->
@@ -26,8 +24,6 @@ The environment created uses [WebPack](https://webpack.github.io/) to pack the a
 
 ### Getting Started
 
-
-
 ### Notes
 
 ## Backend
@@ -35,6 +31,5 @@ The environment created uses [WebPack](https://webpack.github.io/) to pack the a
 ### Options
 
 ### Getting Started
-
 
 ### Notes

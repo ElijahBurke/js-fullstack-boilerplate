@@ -29,42 +29,40 @@ module.exports = [
     name: 'state_management',
     message: 'Select State Management Method: ',
     default: 'react-redux',
-    choices: ['react-redux', 'react-Query', 'react-context'],
+    choices: ['react-redux', 'react-Query', 'mobx'],
   },
   {
     type: 'confirm',
     name: 'routing',
     message: 'Would you like to use Routing (Y/n)?',
-    default: true
+    default: true,
   },
   {
     type: 'confirm',
     name: 'helmet',
     message: 'Would you like to use React-helmet (Y/n)?',
-    default: true
+    default: true,
   },
   {
     type: 'list',
     name: 'testing',
     message: 'Testing Library?',
     default: 'mocha',
-    choices: ['mocha', 'jest', 'cypress']
+    choices: ['mocha', 'jest', 'cypress'],
   },
   {
     type: 'confirm',
     name: 'storybook',
     message: 'Would you like to use Storybook (Y/n)?',
-    default: true
+    default: true,
   },
   {
     type: 'confirm',
     name: 'documentation',
     message: 'Create App Documentation with Docz (Y/n)?',
-    default: true
-  }
+    default: true,
+  },
 ];
-
-
 
 /*
 

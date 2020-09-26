@@ -12,7 +12,6 @@ From the preferred root folder, call the command: create-fullstack-app "selected
 
 The process is fully automated and the terminal will prompt the user to select the required packages to build the file structure and set up the work environment
 
-
 ### Libraries
 
 #### Frontend
@@ -41,6 +40,4 @@ mongo and mongoose
 
 postgreSQL and sequelize
 
-
 ### Notes
-

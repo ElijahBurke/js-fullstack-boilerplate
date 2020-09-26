@@ -4,7 +4,7 @@
 
 // express, koa, graphql, next up Socket.io
 
-// database type: mongo + mongoose, postregsql + sequelize 
+// database type: mongo + mongoose, postregsql + sequelize
 
 module.exports = [
   {
@@ -24,6 +24,6 @@ module.exports = [
   {
     name: 'db_name',
     message: 'Database name',
-    default: ''
+    default: '',
   },
 ];

@@ -1,5 +1,5 @@
- [
-  { 
+[
+  {
     "file_name": "README.md",
     "name": "README.md",
     "path": [],
@@ -17,7 +17,7 @@
     "file_name": "configFSApp.json",
     "name": "configFSApp.json.mustache",
     "path": ["config"],
-    "template" : true,
+    "template": true,
     "dependencies": []
   }
- ]
+]
