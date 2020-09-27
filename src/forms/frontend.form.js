@@ -1,21 +1,5 @@
 // Frontend form for app set up.
 
-// version 1: react only
-
-// Style-management
-
-// State-management
-
-// Testing for now single option, will be multi-option
-
-// Routing
-
-// React Helmet
-
-// Storybook
-
-// Documentation
-
 module.exports = [
   {
     type: 'list',
@@ -29,7 +13,7 @@ module.exports = [
     name: 'state_management',
     message: 'Select State Management Method: ',
     default: 'react-redux',
-    choices: ['react-redux', 'react-Query', 'mobx'],
+    choices: ['react-redux', 'react-query', 'mobx'],
   },
   {
     type: 'confirm',

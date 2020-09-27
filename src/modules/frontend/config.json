@@ -1,23 +1,61 @@
-[
-  {
-    "file_name": "index.js",
-    "name": "index.js.mustache",
-    "path": ["src"],
-    "template": false,
-    "dependencies": []
-  },
-  {
-    "file_name": "App.js",
-    "name": "App.js.mustache",
-    "path": ["src"],
-    "template": false,
-    "dependencies": []
-  },
-  {
-    "file_name": "App.css",
-    "name": "App.css.mustache",
-    "path": ["src"],
-    "template": false,
-    "dependencies": []
-  }
-]
+{
+  "styling" : [
+    {
+      "type": "css",
+      "file_name": "index.css",
+      "name": "index.css.mustache",
+      "template": false
+    },
+    {
+      "type": "styled-components",
+      "file_name": "index.style.js",
+      "name": "index.style.js",
+      "template": false
+    },
+    {
+      "type": "sass",
+      "file_name": "index.scss",
+      "name": "index.scss.mustache",
+      "template": false
+    }
+  ],
+  "state-management" :[
+    {
+      "type": "react-query",
+      "file_name": "index.constants.js",
+      "name": "index.constants.js.mustache",
+      "template": false
+    },
+    {
+      "type": "react-query",
+      "file_name": "index.reducers.js",
+      "name": "index.reducers.js.mustache",
+      "template": false
+    }
+  ],
+  "general": [
+    {
+      "file_name": "index.js",
+      "name": "index.js.mustache",
+      "template": true
+    },
+    {
+      "type": "documentation",
+      "file_name": "index.mdx",
+      "name": "index.mdx.mustache",
+      "template": true
+    },
+    {
+      "type": "storybook",
+      "file_name": "index.stories.js",
+      "name": "index.stories.js.mustache",
+      "template": false
+    },
+    {
+      "type": "react-helmet",
+      "file_name": "index.stories.js",
+      "name": "index.stories.js.mustache",
+      "template": false
+    }
+  ]
+}

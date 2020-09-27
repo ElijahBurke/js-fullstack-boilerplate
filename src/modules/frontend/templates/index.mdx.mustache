@@ -1,0 +1,28 @@
+---
+name: Example
+menu: {{ type }}
+---
+
+import { Playground, Props } from 'docz';
+import Example from './index.js';
+
+# Example
+
+## Properties
+
+<Props of={Example} />
+
+## Basic usage
+
+<Playground>
+  <Example>Component stuff</Example>
+</Playground>
+
+## Using different kinds
+
+<Playground>
+  <Example type="data">Component stuff</Example>
+  <Example type="info">Component stuff</Example>
+  <Example type="alert">Component stuff</Example>
+  <Example type="issue">Component stuff</Example>
+</Playground>

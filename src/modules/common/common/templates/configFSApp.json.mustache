@@ -1,15 +1,23 @@
 {
   "frontend":{
-    "styling": "{{ frontend.style_system }}",
-    "state_management": "{{ frontend.state_management }}",
-    "routing": "{{ frontend.routing }}",
-    "react_helmet": "{{ frontend.helmet }}",
-    "testing_library": "{{ frontend.testing }}",
-    "storybook": "{{ frontend.storybook }}",
-    "docz_library": "{{ frontend.documentation }}"
+    "css": {{ frontend.css }},
+    "styled-components": {{ frontend.styled_components }},
+    "sass": {{ frontend.sass }},
+    "redux": {{frontend.redux}},
+    "query": {{frontend.query}},
+    "mobx": {{frontend.mobx}},
+    "routing": {{ frontend.routing }},
+    "react-helmet": {{ frontend.helmet }},
+    "jest":{{ frontend.jest }},
+    "mocha":{{ frontend.mocha }},
+    "cypress":{{ frontend.cypress }},
+    "storybook": {{ frontend.storybook }},
+    "documentation": {{ frontend.documentation }}
   },
   "backend":{
-    "backend_framework": "{{ backend.backend_type }}",
-    "database": "{{ backend.database }}"
+    "express": {{backend.express}},
+    "koa": {{backend.koa}},
+    "mongoDB": {{ backend.mongoDB }},
+    "postgreSQL": {{ backend.postgreSQL }},
   }
 }

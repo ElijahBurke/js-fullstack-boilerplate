@@ -9,8 +9,10 @@ const installFrontForm = require('../../forms/install.frontend.form');
 const installBackForm = require('../../forms/install.backend.form');
 const fileEditor = require('../tools/fileEditor');
 const createFile = require('../tools/fileWriter');
+const optionsFormatter = require('../tools/formatOptions');
 
 const { log } = require('../tools/logger');
+const formatOptions = require('../tools/formatOptions');
 
 // install and git init
 const initGitFiles = async (appName, environment) => {
@@ -156,6 +158,7 @@ const generateFrontend = async (appName) => {
         resolve();
       });
   });
+
   log('Frontend initialised correctly', 'success');
   log('');
 };
@@ -180,6 +183,7 @@ const userForms = async (appName) => {
     log('Frontend information required', 'attention');
 
     const frontend = await inquirer.prompt(frontendForm);
+
     options.frontend = frontend;
 
     log('Backend information required', 'attention');
@@ -187,7 +191,9 @@ const userForms = async (appName) => {
     const backend = await inquirer.prompt(backendForm);
     options.backend = backend;
 
-    return options;
+    const formattedOptions = await optionsFormatter(options);
+    console.log('newOptions', formattedOptions)
+    return formattedOptions;
 
   } catch (e) {
     log('Error while running the configuration forms', 'error');
@@ -254,6 +260,21 @@ async function buildFullStackApp(appName) {
   await addDependencies(appName, answers.frontend);
   log('Files generation completed', 'success');
 
+  try {
+    process.chdir(`${appName}_client/src`);
+    await new Promise((resolve, reject) => {
+      shell.exec(`mkdir components containers utils`, function (error) {
+        if (error) {
+          console.log('exec error: ' + error);
+          return reject(error);
+        }
+        resolve();
+      });
+    });
+    process.chdir(`../..`);
+  } catch (e) {
+    log('Error creating directories in Frontend src')
+  }
   // initiate storybook if needed
   if (answers.frontend.storybook) {
     await initStorybook(appName);

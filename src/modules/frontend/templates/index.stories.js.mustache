@@ -1,0 +1,13 @@
+import React from 'react';
+import ExampleComponent from './index.js';
+
+// This default export determines where your story goes in the story list
+
+export default {
+  title: 'Example',
+  component: ExampleComponent,
+};
+
+const Template = (args) => <ExampleComponent {...args} />;
+
+export const FirstStory = Template.bind({});

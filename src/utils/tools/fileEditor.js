@@ -24,16 +24,16 @@ const fileEditor = (appName, options) => {
   const currentScripts = packageJSONData.scripts;
 
   // push necessary packages
-  if (options.style_system === 'styled-components') {
+  if (options.styled_components) {
     currentDependencies["styled-components"] = "^5.2.0";
-  } else if (options.style_system === 'sass') {
+  } else if (options.sass) {
     currentDependencies["node-sass"] = "^4.14.1";
   }
-  if (options.state_management === 'react-redux') {
+  if (options.redux) {
     currentDependencies["react-redux"] = "^7.2.1";
-  } else if (options.state_management === 'react-query') {
+  } else if (options.query) {
     currentDependencies["react-query"] = "^2.23.0";
-  } else if (options.state_management === 'mobx') {
+  } else if (options.mobx) {
     currentDependencies["mobx"] = "^5.15.7";
   }
 
