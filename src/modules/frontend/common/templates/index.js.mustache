@@ -1,0 +1,88 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+{{#frontend.routing}}
+import { BrowserRouter } from 'react-router-dom';
+{{/frontend.routing}}
+{{#frontend.query}}
+import { QueryCache, ReactQueryCacheProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query-devtools'
+{{/frontend.query}}
+{{#frontend.redux}}
+import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+//import reducers here
+{{/frontend.redux}}
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+{{#frontend.redux}}
+const composeEnhancers = process.env.NODE_ENV !== 'production' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose;
+
+const rootReducer = combineReducers({
+//add reducers here
+});
+
+const store = createStore(rootReducer, composeEnhancers(
+	applyMiddleware(thunk)	
+));
+
+const app = (
+  <React.StrictMode>
+    <Provider store={store}>
+    {{#frontend.routing}}
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+    {{/frontend.routing}}
+    {{^frontend.routing}}
+      <App />
+    {{/frontend.routing}}
+    </Provider>
+  </React.StrictMode>
+);
+{{/frontend.redux}}
+
+{{#frontend.query}}
+const queryCache = new QueryCache();
+
+const app = (
+  <React.StrictMode>
+    <ReactQueryCacheProvider queryCache={queryCache}>   
+      {{#frontend.routing}}
+        <BrowserRouter>
+          <App />
+        </BrowserRouter> 
+      {{/frontend.routing}}
+      {{^frontend.routing}}
+        <App />
+      {{/frontend.routing}}
+    </ReactQueryCacheProvider>
+    <ReactQueryDevtools initialIsOpen />
+  </React.StrictMode>
+);
+{{/frontend.query}}
+{{^frontend.query}}
+{{^frontend.redux}}
+const app = (
+  <React.StrictMode>
+    {{#frontend.routing}}
+        <BrowserRouter>
+          <App />
+        </BrowserRouter> 
+      {{/frontend.routing}}
+      {{^frontend.routing}}
+        <App />
+      {{/frontend.routing}}
+  </React.StrictMode>
+)
+{{/frontend.redux}}
+{{/frontend.query}}
+
+ReactDOM.render(app, document.getElementById('root'));
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

@@ -1,28 +1,25 @@
 ---
 name: Example
-menu: {{ type }}
+menu: {{ frontend.itemName }}
 ---
 
 import { Playground, Props } from 'docz';
-import Example from './index.js';
+import {{frontend.itemName}} from './index.js';
 
 # Example
 
 ## Properties
-
-<Props of={Example} />
+<Props of={ {{frontend.itemName}} } />
 
 ## Basic usage
 
 <Playground>
-  <Example>Component stuff</Example>
+  <{{frontend.itemName}}>Component stuff</{{frontend.itemName}}>
 </Playground>
 
 ## Using different kinds
 
 <Playground>
-  <Example type="data">Component stuff</Example>
-  <Example type="info">Component stuff</Example>
-  <Example type="alert">Component stuff</Example>
-  <Example type="issue">Component stuff</Example>
+  <{{frontend.itemName}} type="alert">Component stuff</{{frontend.itemName}}>
+  <{{frontend.itemName}} type="issue">Component stuff</{{frontend.itemName}}>
 </Playground>

@@ -12,7 +12,6 @@ const createFile = require('../tools/fileWriter');
 const optionsFormatter = require('../tools/formatOptions');
 
 const { log } = require('../tools/logger');
-const formatOptions = require('../tools/formatOptions');
 
 // install and git init
 const initGitFiles = async (appName, environment) => {
@@ -127,8 +126,21 @@ const initStorybook = async (appName) => {
 const writeNewFiles = async (options) => {
   const types = ['common', 'backend', 'frontend'];
   try {
-    await types.forEach((type) =>
-      require(`../../modules/${type}/common/config.json`).forEach(async (file) => {
+    await types.forEach((type) => {
+      let basicConfig = require(`../../modules/${type}/common/config.json`)
+      if (type === 'frontend') {
+        const requiredFiles = [];
+        for (let spec in options.frontend) {
+          if (options.frontend[spec]) {
+            basicConfig.forEach(file => {
+              if (file.type === spec || !file.type) {
+                requiredFiles.push(file);
+              }});
+          }
+        }
+        basicConfig = requiredFiles;
+      } 
+      basicConfig.forEach(async (file) => {
         await createFile(
           options,
           file,
@@ -136,7 +148,7 @@ const writeNewFiles = async (options) => {
           type
         );
       })
-    );
+    });
   } catch (e) {
     log('Error writing files', 'error');
     throw new Error(e)
@@ -192,7 +204,7 @@ const userForms = async (appName) => {
     options.backend = backend;
 
     const formattedOptions = await optionsFormatter(options);
-    console.log('newOptions', formattedOptions)
+  
     return formattedOptions;
 
   } catch (e) {
@@ -254,12 +266,6 @@ async function buildFullStackApp(appName) {
 
   log('Files generation in progress', 'working');
 
-  await writeNewFiles(answers);
-
-  // install extra dependencies depending on options
-  await addDependencies(appName, answers.frontend);
-  log('Files generation completed', 'success');
-
   try {
     process.chdir(`${appName}_client/src`);
     await new Promise((resolve, reject) => {
@@ -275,6 +281,13 @@ async function buildFullStackApp(appName) {
   } catch (e) {
     log('Error creating directories in Frontend src')
   }
+
+  await writeNewFiles(answers);
+
+  // install extra dependencies depending on options
+  await addDependencies(appName, answers.frontend);
+  log('Files generation completed', 'success');
+
   // initiate storybook if needed
   if (answers.frontend.storybook) {
     await initStorybook(appName);

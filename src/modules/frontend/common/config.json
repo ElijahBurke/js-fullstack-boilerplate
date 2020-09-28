@@ -12,5 +12,116 @@
     "path": [],
     "template": true,
     "dependencies": []
+  },
+  { "type": "documentation",
+    "file_name": "App.mdx",
+    "name": "App.mdx.mustache",
+    "path": ["src"],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "type": "sass",
+    "file_name": "App.scss",
+    "name": "App.scss.mustache",
+    "path": ["src"],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "type": "css",
+    "file_name": "App.css",
+    "name": "App.css.mustache",
+    "path": ["src"],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "file_name": "App.js",
+    "name": "App.js.mustache",
+    "path": ["src"],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "index.js",
+    "name": "index.js.mustache",
+    "path": ["src"],
+    "template": true,
+    "dependencies": []
+  },
+  {
+    "file_name": "index.css",
+    "name": "index.css.mustache",
+    "path": ["src"],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "type": "redux",
+    "file_name": "reducerExample.js",
+    "name": "reducers.js.mustache",
+    "path": [
+      "src", "store", "reducers"
+    ],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "type": "redux",
+    "file_name": "actionTypes.js",
+    "name": "actionTypes.js.mustache",
+    "path": [
+      "src",
+      "store",
+      "actions"
+    ],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "type": "redux",
+    "file_name": "utility.js",
+    "name": "utility.js.mustache",
+    "path": [
+      "src",
+      "store"
+    ],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "type": "redux",
+    "file_name": "actionExample.js",
+    "name": "actionExample.js.mustache",
+    "path": [
+      "src",
+      "store",
+      "actions"
+    ],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "type": "query",
+    "file_name": "ApiService.js",
+    "name": "apiService.js.mustache",
+    "path": [
+      "src",
+      "utils"
+    ],
+    "template": false,
+    "dependencies": []
+  },
+  {
+    "type": "styled_components",
+    "file_name": "global-styles.js",
+    "name": "global-styles.js.mustache",
+    "path": [
+      "src",
+      "utils"
+    ],
+    "template": false,
+    "dependencies": []
   }
 ]

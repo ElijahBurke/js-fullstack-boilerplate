@@ -23,8 +23,9 @@ const createFile = (options, file, path, type) => {
   const toolNew = tool.replace('bin', 'src');
   const from = resolve(toolNew, ...path, file.name);
   let to = resolve(...file.path);
-  
-  options.common.app_name = options.common.app_name.split(' ').join('-');
+  if (type !== undefined) {
+    options.common.app_name = options.common.app_name.split(' ').join('-');
+  }
 
   if (type === 'frontend') {
     to = resolve(`${options.app_name}_client`, ...file.path);

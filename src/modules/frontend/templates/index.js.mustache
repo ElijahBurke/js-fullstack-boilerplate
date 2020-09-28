@@ -1,0 +1,110 @@
+{{#frontend.component}}
+import React from "react";
+{{/frontend.component}}
+{{^frontend.component}}
+import React, {useState, useEffect} from "react";
+{{#frontend.redux}}
+//import reducers here
+{{/frontend.redux}}
+{{#frontend.query}}
+ import { useQuery, useMutation, useQueryCache } from 'react-query'
+ import { getExamples, postExamples } from './utils/ApiService'
+{{/frontend.query}}
+{{/frontend.component}}
+{{#frontend.helmet}}
+import { Helmet } from "react-helmet";
+{{/frontend.helmet}}
+{{#frontend.styled}}
+import * from index.style.js;
+{{/frontend.styled}}
+{{#frontend.css}}
+import './index.css';
+{{/frontend.css}}
+{{#frontend.sass}}
+import './index.scss'
+{{/frontend.sass}}
+{{#frontend.styled_components}}
+import * from './index.style.js';
+{{/frontend.styled_components}}
+
+{{#frontend.component}}
+const {{frontend.path}} = () => {
+  return (
+    <>
+      {{#frontend.helmet}}
+      <Helmet>
+          <meta charSet="utf-8" />
+          <title>My Title</title>
+          <meta name="description" content="My component">
+          <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
+      {{/frontend.helmet}}
+      <div>
+        Dumb component
+      </div>
+    </>
+  );
+}
+export default {{frontend.path}};
+{{/frontend.component}}
+
+{{^frontend.component}}
+const {{frontend.itemName}} = () => {
+  const [example, setExample] = useState('');
+
+  useEffect(()=> {
+    //do something here, api calls etc
+  }, []);
+
+
+{{#frontend.query}}
+  const cache = useQueryCache();
+
+  const exampleQuery = useQuery('examples', getExamples);
+
+  const [addExample] = useMutation(postExample, {
+     onSuccess: () => {
+       // Query Invalidations
+       cache.invalidateQueries('examples')
+     },
+  });
+  {{/frontend.query}}
+
+  return (
+     <>
+      {{#frontend.helmet}}
+      <Helmet>
+          <meta charSet="utf-8" />
+          <title>My Title</title>
+          <meta name="description" content="My omponent">
+          <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
+      {{/frontend.helmet}}
+      <div>
+        Stateful component
+      </div>
+    </>
+  );
+};
+{{#frontend.redux}}
+const mapStateToProps = (state) => ({
+  // Map your state to props
+
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  // Map your dispatch actions
+  increment: () => dispatch(increment()),
+
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)({{frontend.itemName}});
+{{/frontend.redux}}
+{{^frontend.redux}}
+export default {{frontend.itemName}};
+{{/frontend.redux}}
+{{/frontend.component}}
+

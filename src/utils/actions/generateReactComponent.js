@@ -4,19 +4,45 @@ const { log } = require('../tools/logger');
 const process = require('process');
 const { resolve } = require('path');
 const fileWriter = require('../tools/fileWriter');
-const filesPrep = require('../../modules/frontend/config.json')
+const filesPrep = require('../../modules/frontend/config.json');
 // create directory and add files
 
-const createNewComponent = async (itemType, path, config) => {
-  console.log(itemType, path, config);
-  const requiredFiles = [];
-  
-  await fileWriter(
-    null, 
-    null,
-    ['modules', 'frontend', 'templates'],
+const writeNewFiles = async (files, options) => {
+  try {
+    files.forEach((file) => {
+      fileWriter(
+        options,
+        file,
+        ['modules', 'frontend', 'templates']
+      );
+    });
+  } catch (e) {
+    log('Error writing files', 'error');
+    return;
+  }
+}
 
-  );
+const createNewComponent = async (itemType, config) => {
+  const requiredFiles = [];
+
+  for (let spec in config.frontend) {
+    if (config.frontend[spec]) {
+      filesPrep.forEach(file => {
+        if (file.type === spec) {
+          file.path = [`${config.frontend.path}`];
+          file.react = config.frontend.itemType;
+          requiredFiles.push(file);
+        }
+      });
+    }
+  }
+
+  const entry = filesPrep.find(file => file.type === 'entry');
+  entry.path = [`${config.frontend.path}`];
+  entry.react = config.frontend.itemType;
+  requiredFiles.push(entry);
+
+  await writeNewFiles(requiredFiles, config);
 }
 
 // checking the directory
@@ -26,26 +52,23 @@ const checkDirectory = (path, requiredType) => {
     if (directories.includes('src')) {
       if (directories.includes('components')) {
         if (requiredType === 'container') {
-          log('Containers not allowed in Components folder', 'error');
           throw new Error('Containers not allowed in Components folder');
         } else {
           log('Correct directory', 'success');
-          return true;
         }
-      } else if (directories.includes('containers') && directories.indexOf('containers') !== directories.length - 1) {
-        log('Correct directory', 'success');
-        return true;
-      } else {
-        log('Component can not be created in the root containers forlder, only inside an existing container', 'error');
-        throw new Error('Wrong location for component creation');
+      } else if (directories.includes('containers')) {
+        if (requiredType === 'component' && directories.indexOf('containers') === directories.length - 1) {
+          throw new Error('Component can not be created in the root containers folder, only inside an existing container');
+        } else {
+          log('Correct directory', 'success');
+        }
       }
     } else {
-      log('Outside src directory, creation not allowed', 'error');
-      throw new Error('Outside src directory, creation not allowed');
+      throw new Error('Outside src directory, generation not allowed');
     }
   } catch (e) {
-    log('Something went wrong, check your directories and try again', 'error');
-    throw new Error(e);
+    log(e, 'error');
+    return false;
   }
 }
 //getting the config file
@@ -62,34 +85,27 @@ const checkConfigFile = async (directoryPath) => {
     return fs.readFileSync(resolve(pathToRoot, 'config/configFSApp.json'), 'utf-8');
   } catch (e) {
     log('Error reading config file', 'error');
-    throw new Error(e);
+    return false;
   }
 }
 
 const generateReactComponent = async (type, name) => {
-  //check name
-
   //check directory
   const directoryPath = path.join(process.cwd(), '');
   // check the location
-  try {
-    await checkDirectory(directoryPath);
-  } catch (e) {
-    log('Something went wrong checking the directory', 'error');
-    throw new Error(e);
-  }
+  const hasError = checkDirectory(directoryPath, type)
   // get config file
-  const configData = await checkConfigFile(directoryPath, type);
-  const configParsed = configData && JSON.parse(configData);
-  //create and update directory
-  configParsed.frontend.path = name;
-  //generate new directory
-  try {
-    createNewComponent(type, directoryPath, configParsed.frontend);
-  } catch (e) {
-    log('Error creating new item in project', 'error');
+  if (hasError !== false) {
+    const configData = await checkConfigFile(directoryPath, type);
+    const configParsed = configData && JSON.parse(configData);
+    //create and update directory
+    configParsed.frontend.path = configParsed && name;
+    const copyName = name;
+    configParsed.frontend.itemName = copyName[0].toUpperCase() + copyName.substring(1);
+    configParsed.frontend.component = type === 'component' ? true : false;
+    //generate new directory
+    if (configParsed) await createNewComponent(type, configParsed);
   }
-
 };
 
 module.exports = generateReactComponent;

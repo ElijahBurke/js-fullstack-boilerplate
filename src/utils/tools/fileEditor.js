@@ -31,8 +31,11 @@ const fileEditor = (appName, options) => {
   }
   if (options.redux) {
     currentDependencies["react-redux"] = "^7.2.1";
+    currentDependencies["redux-thunk"] = "^2.3.0";
+    currentDependencies["redux"] = "^4.0.5";
   } else if (options.query) {
     currentDependencies["react-query"] = "^2.23.0";
+    currentDependencies["react-query-devtools"] = "^2.5.1";
   } else if (options.mobx) {
     currentDependencies["mobx"] = "^5.15.7";
   }

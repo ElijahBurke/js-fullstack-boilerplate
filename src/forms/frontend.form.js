@@ -6,14 +6,14 @@ module.exports = [
     name: 'style_system',
     message: 'Select styling option: ',
     default: 'none',
-    choices: ['none', 'styled-components', 'sass', 'css'],
+    choices: ['styled-components', 'sass', 'css'],
   },
   {
     type: 'list',
     name: 'state_management',
     message: 'Select State Management Method: ',
     default: 'react-redux',
-    choices: ['react-redux', 'react-query', 'mobx'],
+    choices: ['react-redux', 'react-query', 'none'], //add mobx later on
   },
   {
     type: 'confirm',
