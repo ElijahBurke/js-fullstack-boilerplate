@@ -3,6 +3,7 @@
 {{#backend.express}}
 const express = require('express');
 const app = express();
+const cors = require('cors');
 {{/backend.express}}
 
 {{#backend.koa}}
@@ -10,13 +11,15 @@ const Koa = require('koa');
 const app = new Koa();
 const serve = require('koa-static');
 const bodyParser = require('koa-bodyparser');
+const cors = require('@koa/cors');
+
 {{/backend.koa}}
 
 const conf = require('./config');
 const router = require('./routers');
 
 const PORT = 3001;
-
+app.use(cors());
 {{#backend.express}}
 app.use(express.static(conf.clientPath));
 app.use(express.json());

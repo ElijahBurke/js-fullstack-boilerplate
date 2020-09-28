@@ -47,28 +47,3 @@ module.exports = [
     default: true,
   },
 ];
-
-/*
-
-  create-fullstack-app create container "containerA"=> index.js
-
-    import {} from 
-  styled, redux options ['redux', 'css', docz] => x.constants.js, x.reducers.js
-
-    style.css
-  docz x.documentations.js
-
-  script => containerA {
-    index.js
-    index.style.js
-    index.constants.js
-    index.reducers.js
-  }
-
-  css redux{
-    index.js
-    index.style.css
-    index.constants.js
-    index.reducers.js
-  }
-*/

@@ -126,7 +126,7 @@ const initStorybook = async (appName) => {
 const writeNewFiles = async (options) => {
   const types = ['common', 'backend', 'frontend'];
   try {
-    await types.forEach((type) => {
+    types.forEach((type) => {
       let basicConfig = require(`../../modules/${type}/common/config.json`)
       if (type === 'frontend') {
         const requiredFiles = [];
@@ -140,8 +140,8 @@ const writeNewFiles = async (options) => {
         }
         basicConfig = requiredFiles;
       } 
-      basicConfig.forEach(async (file) => {
-        await createFile(
+      basicConfig.forEach((file) => {
+        createFile(
           options,
           file,
           ['modules', type, 'common', 'templates'],

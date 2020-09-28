@@ -1,11 +1,3 @@
-// form for backend selections
-
-// nodeJS standard for now
-
-// express, koa, graphql, next up Socket.io
-
-// database type: mongo + mongoose, postregsql + sequelize
-
 module.exports = [
   {
     type: 'list',

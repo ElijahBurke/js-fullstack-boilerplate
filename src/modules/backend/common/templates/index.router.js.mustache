@@ -8,6 +8,8 @@ const example = require('../controllers');
 
 router.get('/example', example.getExamples);
 router.post('/example', example.postExample);
+router.delete('/example/:_id', example.deleteExample);
+router.update('/example/:_id', example.updateExample);
 
 {{/backend.express}}
 
@@ -20,6 +22,8 @@ const example = require('../controllers');
 
 router.get('/example', example.getExamples);
 router.post('/example', example.postExample);
+router.delete('/example/:_id', example.deleteExample);
+router.update('/example/:_id', example.updateExample);
 
 {{/backend.koa}}
 
