@@ -1,0 +1,23 @@
+import * as actionTypes from '../actions/actionTypes';
+import {updateObject} from '../utility';
+
+const initialState = {
+  examples: []
+};
+
+const getAll = (state, action) => {
+  return updateObject(state, {
+    examples: action.payload
+  })
+}
+
+const reducer = (state=initialState, action) => {
+	switch (action.type) {
+		case actionTypes.GET_ALL_EXAMPLES:
+			return getAll(state, action);
+		default:
+			return state;
+	}
+};
+
+export default reducer;

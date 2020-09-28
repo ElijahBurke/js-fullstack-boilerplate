@@ -24,16 +24,19 @@ const fileEditor = (appName, options) => {
   const currentScripts = packageJSONData.scripts;
 
   // push necessary packages
-  if (options.style_system === 'styled-components') {
+  if (options.styled_components) {
     currentDependencies["styled-components"] = "^5.2.0";
-  } else if (options.style_system === 'sass') {
+  } else if (options.sass) {
     currentDependencies["node-sass"] = "^4.14.1";
   }
-  if (options.state_management === 'react-redux') {
+  if (options.redux) {
     currentDependencies["react-redux"] = "^7.2.1";
-  } else if (options.state_management === 'react-query') {
+    currentDependencies["redux-thunk"] = "^2.3.0";
+    currentDependencies["redux"] = "^4.0.5";
+  } else if (options.query) {
     currentDependencies["react-query"] = "^2.23.0";
-  } else if (options.state_management === 'mobx') {
+    currentDependencies["react-query-devtools"] = "^2.5.1";
+  } else if (options.mobx) {
     currentDependencies["mobx"] = "^5.15.7";
   }
 
@@ -53,7 +56,23 @@ const fileEditor = (appName, options) => {
     currentScripts["docz:build"] = "docz build";
     currentScripts["docz:serve"] = "docz build && docz serve";
   }
+  if (options.mocha) {
+    currentDependencies["mocha"] = "^8.1.3";
+    currentDependencies["chai"] = "^4.2.0";
+    currentScripts["test"] = "mocha";
+  }
+  if (options.jest) {
+    currentDependencies["jest"] = "^26.4.2";
+    currentDependencies["react-test-renderer"] = "^16.13.1";
+    currentDependencies["enzyme"] = "^3.11.0";
+    currentDependencies["enzyme-adapter-react-16"] = "^1.15.5";
+    currentScripts["test"] = "jest";
+  }
 
+  if (options.cypress) {
+    currentDependencies["cypress"] = "^5.2.0";
+    currentScripts["cypress"] = "cypress open";
+  }
   // update file object
   packageJSONData.dependencies = currentDependencies;
   packageJSONData.scripts = currentScripts;

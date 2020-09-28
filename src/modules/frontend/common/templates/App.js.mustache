@@ -1,0 +1,88 @@
+import React, { useEffect, useState } from 'react';
+{{#frontend.routing}}
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+{{/frontend.routing}}
+{{#frontend.redux}}
+import { connect } from 'react-redux';
+import * as actions from './store/actions';
+{{/frontend.redux}}
+{{#frontend.query}}
+ import { useQuery, useMutation, useQueryCache } from 'react-query'
+ import { getExamples, postExamples } from './utils/ApiService'
+{{/frontend.query}}
+{{#frontend.styled_components}}
+import { GlobalStyle } from './utils/global-styles.js';
+import './App.css';
+{{/frontend.styled_components}}
+{{#frontend.css}}
+import './App.css';
+{{/frontend.css}}
+{{#frontend.sass}}
+import './App.scss';
+{{/frontend.sass}}
+{{#frontend.helmet}}
+import { Helmet } from "react-helmet";
+{{/frontend.helmet}}
+
+function App() {
+  {{#frontend.query}}
+  const cache = useQueryCache();
+
+  const exampleQuery = useQuery('examples', getExamples);
+
+  const [addExample] = useMutation(postExample, {
+     onSuccess: () => {
+       // Query Invalidations
+       cache.invalidateQueries('examples')
+     },
+  });
+  {{/frontend.query}}
+  <>
+    {{#frontend.helmet}}
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>My Title</title>
+      <link rel="canonical" href="http://mysite.com/example" />
+    </Helmet>
+    {{/frontend.helmet}}
+    //your containers or components come in here
+    {{#frontend.routing}}
+    <Switch>
+      // <Route path="" exact component={} /> // exact url match
+      // <Route path="" component={}/> 
+      // <Route path="" >
+      //  <Redirect path="" component={}/> //redirect from route to redirect
+      // </Route>
+      // <Route path="*" component={}/> // 404 route
+    </Switch>
+    {{/frontend.routing}}
+    {{#frontend.styled_components}}
+    <GlobalStyle />
+    {{/frontend.styled_components}}
+  </>
+}
+{{#frontend.redux}}
+const mapStateToProps = state => {
+  return {
+    //get your states here
+    example: state.reducer.example
+  };
+};
+
+const mapDispatchToprops = dispatch => {
+  return {
+   //dispatch actions here
+   getSomething: (data) => dispatch(actions.getSomething(data))
+  };
+};
+{{#frontend.routing}}
+const connectedApp = connect(mapStateToProps, mapDispatchToprops)(App);
+export default withRouter(connectedApp);
+{{/frontend.routing}}
+{{^frontend.routing}}
+export default connect(mapStateToProps, mapDispatchToprops)(App);
+{{/frontend.routing}}
+{{/frontend.redux}}
+{{^frontend.redux}}
+export default App;
+{{/frontend.redux}}

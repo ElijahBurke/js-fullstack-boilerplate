@@ -1,23 +1,58 @@
 [
   {
+    "type": "css",
+    "file_name": "index.css",
+    "name": "index.css.mustache",
+    "path": [],
+    "template": false
+  },
+  {
+    "type": "styled-components",
+    "file_name": "index.style.js",
+    "name": "index.style.js.mustache",
+    "path": [],
+    "template": false
+  },
+  {
+    "type": "sass",
+    "file_name": "index.scss",
+    "name": "index.scss.mustache",
+    "path": [],
+    "template": false
+  },
+  {
+    "type": "entry",
     "file_name": "index.js",
     "name": "index.js.mustache",
-    "path": ["src"],
-    "template": false,
-    "dependencies": []
+    "path": [],
+    "template": true
   },
   {
-    "file_name": "App.js",
-    "name": "App.js.mustache",
-    "path": ["src"],
-    "template": false,
-    "dependencies": []
+    "type": "documentation",
+    "file_name": "index.mdx",
+    "name": "index.mdx.mustache",
+    "path": [],
+    "template": true
   },
   {
-    "file_name": "App.css",
-    "name": "App.css.mustache",
-    "path": ["src"],
-    "template": false,
-    "dependencies": []
+    "type": "storybook",
+    "file_name": "index.stories.js",
+    "name": "index.stories.js.mustache",
+    "path": [],
+    "template": true
+  },
+  {
+    "type": "jest",
+    "file_name": "index.test.js",
+    "name": "index.jest.test.js.mustache",
+    "path": [],
+    "template": false
+  },
+  {
+    "type": "mocha",
+    "file_name": "index.test.js",
+    "name": "index.mocha.test.js.mustache",
+    "path": ["test"],
+    "template": false
   }
 ]

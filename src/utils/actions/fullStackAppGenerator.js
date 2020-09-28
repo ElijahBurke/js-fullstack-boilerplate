@@ -9,6 +9,7 @@ const installFrontForm = require('../../forms/install.frontend.form');
 const installBackForm = require('../../forms/install.backend.form');
 const fileEditor = require('../tools/fileEditor');
 const createFile = require('../tools/fileWriter');
+const optionsFormatter = require('../tools/formatOptions');
 
 const { log } = require('../tools/logger');
 
@@ -125,16 +126,29 @@ const initStorybook = async (appName) => {
 const writeNewFiles = async (options) => {
   const types = ['common', 'backend', 'frontend'];
   try {
-    await types.forEach((type) =>
-      require(`../../modules/${type}/common/config.json`).forEach(async (file) => {
-        await createFile(
+    types.forEach((type) => {
+      let basicConfig = require(`../../modules/${type}/common/config.json`)
+      if (type === 'frontend') {
+        const requiredFiles = [];
+        for (let spec in options.frontend) {
+          if (options.frontend[spec]) {
+            basicConfig.forEach(file => {
+              if (file.type === spec || !file.type) {
+                requiredFiles.push(file);
+              }});
+          }
+        }
+        basicConfig = requiredFiles;
+      } 
+      basicConfig.forEach((file) => {
+        createFile(
           options,
           file,
           ['modules', type, 'common', 'templates'],
           type
         );
       })
-    );
+    });
   } catch (e) {
     log('Error writing files', 'error');
     throw new Error(e)
@@ -156,6 +170,7 @@ const generateFrontend = async (appName) => {
         resolve();
       });
   });
+
   log('Frontend initialised correctly', 'success');
   log('');
 };
@@ -180,6 +195,7 @@ const userForms = async (appName) => {
     log('Frontend information required', 'attention');
 
     const frontend = await inquirer.prompt(frontendForm);
+
     options.frontend = frontend;
 
     log('Backend information required', 'attention');
@@ -187,7 +203,9 @@ const userForms = async (appName) => {
     const backend = await inquirer.prompt(backendForm);
     options.backend = backend;
 
-    return options;
+    const formattedOptions = await optionsFormatter(options);
+  
+    return formattedOptions;
 
   } catch (e) {
     log('Error while running the configuration forms', 'error');
@@ -247,6 +265,22 @@ async function buildFullStackApp(appName) {
   // write files in common backend and frontend
 
   log('Files generation in progress', 'working');
+
+  try {
+    process.chdir(`${appName}_client/src`);
+    await new Promise((resolve, reject) => {
+      shell.exec(`mkdir components containers utils`, function (error) {
+        if (error) {
+          console.log('exec error: ' + error);
+          return reject(error);
+        }
+        resolve();
+      });
+    });
+    process.chdir(`../..`);
+  } catch (e) {
+    log('Error creating directories in Frontend src')
+  }
 
   await writeNewFiles(answers);
 

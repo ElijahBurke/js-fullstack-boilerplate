@@ -1,0 +1,50 @@
+import { createGlobalStyle } from 'styled-components';
+\\ examples below
+const colors = {
+  primary: {
+    green: '#59b280',
+    beige: '#eae1bb',
+    red: '#af3232',
+  }
+}
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0 auto;
+    color: #FFF;
+    background-color: #000;
+    overscroll-behavior: none;
+
+    &.no-scroll {
+      overflow: hidden;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+  }
+
+  h1 {
+
+  }
+
+  button {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    appearance: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    outline: none;
+  }
+`
+
+export { colors, easings, GlobalStyle };

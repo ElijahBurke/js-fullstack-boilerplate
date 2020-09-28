@@ -1,0 +1,10 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
+describe('<Example />', () => {
+
+  let wrapper = shallow(<Example/>);
+    it('should render an image without breaking',()=>{
+        expect(wrapper.find("img")).toHaveLength(1);
+    });
+});

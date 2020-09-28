@@ -3,14 +3,150 @@
     "file_name": "README.md",
     "name": "README.md.mustache",
     "path": [],
-    "template": true,
-    "dependencies": []
+    "template": true
   },
   {
     "file_name": ".env",
     "name": "env.mustache",
     "path": [],
-    "template": true,
-    "dependencies": []
+    "template": true
+  },
+  { "type": "documentation",
+    "file_name": "App.mdx",
+    "name": "App.mdx.mustache",
+    "path": ["src"],
+    "template": false
+  },
+  {
+    "type": "sass",
+    "file_name": "App.scss",
+    "name": "App.scss.mustache",
+    "path": ["src"],
+    "template": false
+  },
+  {
+    "type": "css",
+    "file_name": "App.css",
+    "name": "App.css.mustache",
+    "path": ["src"],
+    "template": false
+  },
+  {
+    "file_name": "App.js",
+    "name": "App.js.mustache",
+    "path": ["src"],
+    "template": true
+  },
+  {
+    "file_name": "index.js",
+    "name": "index.js.mustache",
+    "path": ["src"],
+    "template": true
+  },
+  {
+    "file_name": "index.css",
+    "name": "index.css.mustache",
+    "path": ["src"],
+    "template": false
+  },
+  {
+    "type": "redux",
+    "file_name": "reducerExample.js",
+    "name": "reducers.js.mustache",
+    "path": [
+      "src", "store", "reducers"
+    ],
+    "template": false
+  },
+  {
+    "type": "redux",
+    "file_name": "actionTypes.js",
+    "name": "actionTypes.js.mustache",
+    "path": [
+      "src",
+      "store",
+      "actions"
+    ],
+    "template": false
+  },
+  {
+    "type": "redux",
+    "file_name": "utility.js",
+    "name": "utility.js.mustache",
+    "path": [
+      "src",
+      "store"
+    ],
+    "template": false
+  },
+  {
+    "type": "redux",
+    "file_name": "actionExample.js",
+    "name": "actionExample.js.mustache",
+    "path": [
+      "src",
+      "store",
+      "actions"
+    ],
+    "template": false
+  },
+  {
+    "type": "query",
+    "file_name": "ApiService.js",
+    "name": "apiService.js.mustache",
+    "path": [
+      "src",
+      "utils"
+    ],
+    "template": false
+  },
+  {
+    "type": "styled_components",
+    "file_name": "global-styles.js",
+    "name": "global-styles.js.mustache",
+    "path": [
+      "src",
+      "utils"
+    ],
+    "template": false
+  },
+  {
+    "type": "mocha",
+    "file_name": "App.test.js",
+    "name": "App.mocha.test.js.mustache",
+    "path": [
+      "src",
+      "test"
+    ],
+    "template": false
+  },
+  {
+    "type": "jest",
+    "file_name": "App.test.js",
+    "name": "App.jest.test.js.mustache",
+    "path": [
+      "src",
+      "test"
+    ],
+    "template": false
+  },
+  {
+    "type": "jest",
+    "file_name": "setupTests.js",
+    "name": "setupTests.js.mustache",
+    "path": [
+      "src"
+    ],
+    "template": false
+  },
+  {
+    "type": "cypress",
+    "file_name": "sample.js",
+    "name": "App.cypress.test.js.mustache",
+    "path": [
+      "cypress",
+      "integration"
+    ],
+    "template": false
   }
 ]
