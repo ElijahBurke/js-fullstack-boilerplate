@@ -56,7 +56,23 @@ const fileEditor = (appName, options) => {
     currentScripts["docz:build"] = "docz build";
     currentScripts["docz:serve"] = "docz build && docz serve";
   }
+  if (options.mocha) {
+    currentDependencies["mocha"] = "^8.1.3";
+    currentDependencies["chai"] = "^4.2.0";
+    currentScripts["test"] = "mocha";
+  }
+  if (options.jest) {
+    currentDependencies["jest"] = "^26.4.2";
+    currentDependencies["react-test-renderer"] = "^16.13.1";
+    currentDependencies["enzyme"] = "^3.11.0";
+    currentDependencies["enzyme-adapter-react-16"] = "^1.15.5";
+    currentScripts["test"] = "jest";
+  }
 
+  if (options.cypress) {
+    currentDependencies["cypress"] = "^5.2.0";
+    currentScripts["cypress"] = "cypress open";
+  }
   // update file object
   packageJSONData.dependencies = currentDependencies;
   packageJSONData.scripts = currentScripts;

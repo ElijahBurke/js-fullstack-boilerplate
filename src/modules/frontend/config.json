@@ -40,5 +40,19 @@
     "name": "index.stories.js.mustache",
     "path": [],
     "template": true
+  },
+  {
+    "type": "jest",
+    "file_name": "index.test.js",
+    "name": "index.jest.test.js.mustache",
+    "path": [],
+    "template": false
+  },
+  {
+    "type": "mocha",
+    "file_name": "index.test.js",
+    "name": "index.mocha.test.js.mustache",
+    "path": ["test"],
+    "template": false
   }
 ]
