@@ -12,8 +12,7 @@
   },
   "bin": {
     "create-fullstack-app": "./bin/createApp.js",
-    "rg": "./bin/generateReactComponent.js",
-    "bg": "./bin/generateBackendComponent.js"
+    "rg": "./bin/generateReactComponent.js"
   },
   "preferGlobal": true,
   "repository": {
