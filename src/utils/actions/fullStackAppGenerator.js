@@ -18,9 +18,10 @@ const initGitFiles = async (appName, environment) => {
   try {
     log(`Initialising git for ${environment}`, 'working');
     process.chdir(
-      `${environment === 'frontend'
-        ? `${appName}_client`
-        : `${appName}_${environment}`
+      `${
+        environment === 'frontend'
+          ? `${appName}_client`
+          : `${appName}_${environment}`
       }`
     );
     await shell.exec(`git init`);
@@ -36,9 +37,10 @@ const installDependencies = async (appName, environment) => {
   try {
     log(`Installing ${environment}`, 'working');
     process.chdir(
-      `${environment === 'frontend'
-        ? `${appName}_client`
-        : `${appName}_${environment}`
+      `${
+        environment === 'frontend'
+          ? `${appName}_client`
+          : `${appName}_${environment}`
       }`
     );
     await shell.exec(`npm i`);
@@ -80,7 +82,7 @@ const installAndGit = async (appName, environment) => {
     log(`Error installing ${environment}`, 'error');
     throw new Error(e);
   }
-}
+};
 //add required dependencies
 
 const addDependencies = async (appName, options) => {
@@ -90,18 +92,15 @@ const addDependencies = async (appName, options) => {
     log('Error writing dependencies in frontend', 'error');
     throw new Error(e);
   }
-}
+};
 
-//init Storybook 
+//init Storybook
 const initStorybook = async (appName) => {
   try {
     process.chdir(`${appName}_client`);
     log('Storybook set up in progress', 'working');
     await new Promise((resolve, reject) => {
-      shell.exec(
-        `npx sb init`, function (
-          error
-        ) {
+      shell.exec(`npx sb init`, function (error) {
         if (error) {
           console.log('exec error: ' + error);
           // Reject if there is an error:
@@ -113,13 +112,16 @@ const initStorybook = async (appName) => {
     });
 
     log('Storybook initialised', 'success');
-    log('run storybook using "npm run storybook" in client root folder', 'info');
+    log(
+      'run storybook using "npm run storybook" in client root folder',
+      'info'
+    );
     process.chdir(`..`);
   } catch (e) {
     log('Error initialising storybook', 'error');
     throw new Error(e);
   }
-}
+};
 
 // write files in directories
 
@@ -127,19 +129,20 @@ const writeNewFiles = async (options) => {
   const types = ['common', 'backend', 'frontend'];
   try {
     types.forEach((type) => {
-      let basicConfig = require(`../../modules/${type}/common/config.json`)
+      let basicConfig = require(`../../modules/${type}/common/config.json`);
       if (type === 'frontend') {
         const requiredFiles = [];
         for (let spec in options.frontend) {
           if (options.frontend[spec]) {
-            basicConfig.forEach(file => {
+            basicConfig.forEach((file) => {
               if (file.type === spec || !file.type) {
                 requiredFiles.push(file);
-              }});
+              }
+            });
           }
         }
         basicConfig = requiredFiles;
-      } 
+      }
       basicConfig.forEach((file) => {
         createFile(
           options,
@@ -147,13 +150,13 @@ const writeNewFiles = async (options) => {
           ['modules', type, 'common', 'templates'],
           type
         );
-      })
+      });
     });
   } catch (e) {
     log('Error writing files', 'error');
-    throw new Error(e)
+    throw new Error(e);
   }
-}
+};
 
 // generate frontend
 
@@ -162,13 +165,15 @@ const generateFrontend = async (appName) => {
 
   await new Promise((resolve, reject) => {
     shell.exec(
-      `npx create-react-app ${appName}_client --template js-fullstack-app-frontend`, function (error) {
+      `npx create-react-app ${appName}_client --template js-fullstack-app-frontend`,
+      function (error) {
         if (error) {
           console.log('exec error: ' + error);
           return reject(error);
         }
         resolve();
-      });
+      }
+    );
   });
 
   log('Frontend initialised correctly', 'success');
@@ -204,14 +209,13 @@ const userForms = async (appName) => {
     options.backend = backend;
 
     const formattedOptions = await optionsFormatter(options);
-  
-    return formattedOptions;
 
+    return formattedOptions;
   } catch (e) {
     log('Error while running the configuration forms', 'error');
     throw new Error(e);
   }
-}
+};
 
 //create root
 
@@ -227,7 +231,6 @@ const createDirectories = async (appName) => {
 
 //entry point to start writing the files
 async function buildFullStackApp(appName) {
-
   //check presence of dependencies
 
   const requiredDep = ['git', 'npm', 'npx'];
@@ -279,7 +282,7 @@ async function buildFullStackApp(appName) {
     });
     process.chdir(`../..`);
   } catch (e) {
-    log('Error creating directories in Frontend src')
+    log('Error creating directories in Frontend src');
   }
 
   await writeNewFiles(answers);
@@ -298,6 +301,6 @@ async function buildFullStackApp(appName) {
   await installAndGit(appName, 'backend');
 
   log('🚀🚀🚀 Set up completed!! 🚀🚀🚀', 'finish');
-};
+}
 
 module.exports = buildFullStackApp;

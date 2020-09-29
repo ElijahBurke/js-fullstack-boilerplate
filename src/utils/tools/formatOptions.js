@@ -9,20 +9,20 @@ const formatOptions = (rawOptions) => {
       mobx: false,
       query: false,
       routing: false,
-      documentation: false, 
+      documentation: false,
       storybook: false,
       helmet: false,
       jest: false,
       mocha: false,
-      cypress: false
+      cypress: false,
     },
     backend: {
       express: false,
       koa: false,
       mongoDB: false,
-      postgreSQL: false
+      postgreSQL: false,
     },
-    common: {}
+    common: {},
   };
 
   formattedOptions.app_name = rawOptions.app_name;
@@ -47,7 +47,7 @@ const formatOptions = (rawOptions) => {
   formattedOptions.frontend.helmet = rawOptions.frontend.helmet;
   formattedOptions.frontend.documentation = rawOptions.frontend.documentation;
   formattedOptions.frontend.storybook = rawOptions.frontend.storybook;
-  
+
   if (rawOptions.frontend.testing === 'jest') {
     formattedOptions.frontend.jest = true;
   } else if (rawOptions.frontend.testing === 'mocha') {
@@ -61,14 +61,14 @@ const formatOptions = (rawOptions) => {
   } else if (rawOptions.backend.backend_type === 'koa') {
     formattedOptions.backend.koa = true;
   }
-  
+
   if (rawOptions.backend.database === 'mongoDB') {
     formattedOptions.backend.mongoDB = true;
   } else if (rawOptions.backend.database === 'postgreSQL') {
     formattedOptions.backend.postgreSQL = true;
   }
-  
+
   return formattedOptions;
-}
+};
 
 module.exports = formatOptions;
