@@ -138,46 +138,43 @@ Containers requirements: containers can only be generated in the src/containers 
 
 To configure the project client, the following options are available (one for each group):
 
-  - Styiling system:
-    - css
-    - sass
-    - styled-components (CSS-in-JS)
+| Style System     	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| css              	| -              	| -             |
+| sass             	| [node-sass](https://www.npmjs.com/package/node-sass) |  "^4.14.1"  |    
+| styled-components	| [styled-components](https://styled-components.com/)  |  "^5.2.0"   |
 
-  - State management:
-    - none
-    - react-redux
-    - react-query
+| State Management 	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| none             	| -              	| -             |
+| react-redux   	  | [react-redux](https://react-redux.js.org/) |  "^7.2.1"   |
+| react-query   	  | [react-query](https://github.com/tannerlinsley/react-query#readme)   |  "^2.23.0"   |
 
-  - Helmet:
-    - none
-    - react-helmet
+| Helmet           	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| none             	| -              	| -             |
+| react-helmet     	| [react-helmet](github.com/nfl/react-helmet#readme)|   "^6.1.0"   |
 
-  - Routing:
-    - none
-    - react-routing
-  
-  - Testing library:
-    - mocha and chai
-    - jest and enzyme
-    - cypress
+| Routing          	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| none            	| -              	| -             |
+| react-routing    	| [react-router](https://github.com/ReactTraining/react-router#readme)|   "^5.2.0"   |
 
-  - Documentation:
-    - none
-    - Docz
+| Test             	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| Mocha            	| [mocha](https://mochajs.org/)	| "^8.1.3"   |
+| Jest             	| [jest](https://jestjs.io/)	| "^26.4.2"   |
+| Cypress          	| [cypress](https://docs.cypress.io/guides/getting-started/installing-cypress.html#System-requirements)  | "^5.3.0"   |
 
-  - Unit Design 
-    - none
-    - Storybook
+| Documentation    	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| none     	        | -              	| -             |
+| Docz 	            | [docz](https://www.docz.site/) 	|  "^2.3.1"   |
 
-| Configuration    	|               	|             	|                  	|
-|------------------	|---------------	|-------------	|------------------	|
-| Style system     	| css           	| sass        	| styled-component 	|
-| State Management 	| react-redux   	| react-query 	| none             	|
-| Helmet           	| react-helmet  	| none        	|                  	|
-| Routing          	| react-routing 	| none        	|                  	|
-| Test             	| jest          	| mocha       	| cypress          	|
-| Documentation    	| Docz          	| none        	|                  	|
-| Unit Design      	| Storybook     	| none        	|                  	|
+| Unit Design     	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| none           	  | -              	| -             |
+| Storybook       	| [storybook](https://github.com/storybookjs/storybook/tree/master/lib/cli) 	|  "^6.0.22"   |
 
 ### Getting Started
 
@@ -187,6 +184,11 @@ To configure the project client, the following options are available (one for ea
 
 
 ### Options
+
+| Framework     	  | Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| express  | [express](https://expressjs.com/) | "^4.17.1 |
+| koa     | [koa](https://koajs.com/) |  "^2.13.0" |
 
 ### Getting Started
 
