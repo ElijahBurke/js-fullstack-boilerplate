@@ -18,10 +18,10 @@ To use the CLI, the following packages are required: [npx](https://www.npmjs.com
 
 # Table of Contents
 
- - [Installation](#Installation)
- - [Getting Started](#Getting Started - Local Development)
- - [Frontend](#Frontend)
- - [Backend](#Backend)
+ - [Installation](#markdown-header-Installation)
+ - [Getting Started](#markdown-header-Getting-Started)
+ - [Frontend](#markdown-header-Frontend)
+ - [Backend](#markdown-header-Backend)
 
 ## Installation
 
