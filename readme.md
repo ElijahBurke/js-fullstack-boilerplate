@@ -50,41 +50,7 @@ The general folder structure it exposes:
     ├── config
     |   └── configFSApp.json
     ├── projectName_client
-    |   ├── public
-    |   |   ├── index.html
-    |   |   ├── manifest.json
-    |   |   ├── favicon.ico
-    |   |   ├── robots.txt
-    |   |   ├── logo512.png
-    |   |   └── logo192.png
-    |   ├── src
-    |   |   ├── components
-    |   |   ├── containers
-    |   |   ├── utils
-    |   |   ├── App.js
-    |   |   ├── App.css
-    |   |   ├── index.js
-    |   |   └── index.css
-    |   ├── husky.config.js
-    |   ├── prettier.config.js
-    |   ├── package.json
-    |   ├── README.md
-    |   ├── .env
-    |   ├── .prettierignore
     ├── projectName_backend
-    |   ├── controllers
-    |   |   ├── index.js
-    |   |   └── controller.js
-    |   ├── models
-    |   |   ├── index.js
-    |   |   └── model.js
-    |   ├── routers
-    |   |   ├── index.js
-    |   |   └── router.js
-    |   ├── index.js
-    |   ├── config.js
-    |   ├── package.json
-    |   └── README.md
     ├── README.md
     └── package.json
 ```
@@ -134,10 +100,54 @@ Components requirements: current directory to be src/components or src/container
 
 Containers requirements: containers can only be generated in the src/containers folder.
 
+### Folder Structure
+
+```bash
+└── projectName_client
+    ├── public
+    |   |   ├── index.html
+    |   |   ├── manifest.json
+    |   |   ├── favicon.ico
+    |   |   ├── robots.txt
+    |   |   ├── logo512.png
+    |   |   └── logo192.png
+    |   ├── src
+    |   |   ├── components
+    |   |   |   └── componentExample
+    |   |   |       ├── index.js
+    |   |   |       ├── index.style.js / index.css / index.scss
+    |   |   |       ├── index.test.js / test/index.test.js
+    |   |   |       ├── index.mdx
+    |   |   |       └── index.stories.js      
+    |   |   ├── containers
+    |   |   |   └── containerExample
+    |   |   |       ├── (generation Option) componentChildOfContainerExample
+    |   |   |       ├── index.js
+    |   |   |       ├── index.style.js / index.css / index.scss
+    |   |   |       ├── index.test.js / test/index.test.js
+    |   |   |       ├── index.mdx
+    |   |   |       └── index.stories.js 
+    |   |   ├── utils
+    |   |   ├── App.js
+    |   |   ├── App.css
+    |   |   ├── index.js
+    |   |   └── index.css
+    |   ├── husky.config.js
+    |   ├── prettier.config.js
+    |   ├── package.json
+    |   ├── README.md
+    |   ├── .env
+    |   └── .prettierignore
+```
+
+
 ### Options
 
 To configure the project client, the following options are available (one for each group):
+
 #### Styling system
+
+Depending on the choosen option, calling  ```shell rg component/container "${name}" ``` will autmatically generate an index.css, index.scss or index.style.js file in the component folder.
 
 | Option     	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
@@ -147,13 +157,32 @@ To configure the project client, the following options are available (one for ea
 
 #### State Management
 
+- By selecting react-redux: 
+  - root index.js will be prepoulated with the required Provider and store for redux.
+  - Containers created with ```rg container  "${name}" ``` will include the connect function and mapStateToProps and mapDispatchToProps connections.
+
+- By selecting react-query:
+  - root index.js will be populated with ReactQueryCacheProvider and QueryChace
+  - Containers index.js will be prepoulated with methods useQuery, useMutation, useQueryCache.
+  - in utils directory an ApiService.js file will be created to  add all the api calls (connected to containers already).
+
 | Option 	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | none             	| -              	| -             |
 | react-redux   	  | [react-redux](https://react-redux.js.org/) |  "^7.2.1"   |
 | react-query   	  | [react-query](https://github.com/tannerlinsley/react-query#readme)   |  "^2.23.0"   |
 
+#####  Extra dependencies installed
+
+- React Redux:
+  - [redux](https://redux.js.org/), version: "^4.0.5" 
+  - [thunk](https://www.npmjs.com/package/redux-thunk), version "^2.3.0"
+
 #### Helmet
+
+- By selecting Helmet:
+  - App.js will be prepopulated with a general <Helmet> tag.
+  - Components and containers will be prepopualted with a general <Helmet> tag.
 
 | Option           	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
@@ -162,12 +191,23 @@ To configure the project client, the following options are available (one for ea
 
 #### Routing
 
+- By selecting Routing:
+  - App.js will be prepopulated with react-router and react-router-dom methods and example <Route> tags will be added.
+
 | Option          	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | none            	| -              	| -             |
 | react-routing    	| [react-router](https://github.com/ReactTraining/react-router#readme)|   "^5.2.0"   |
 
+#####  Extra dependencies installed
+
+- [react-router-dom](github.com/ReactTraining/react-router#readme), version: "^5.2.0" 
+
 #### Testing Library
+
+- By selecting one of the libraries:
+  - a test file in the form of index.test.js will be added to the component/container directory
+  - config files will be added to src
 
 | Option             	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
@@ -175,34 +215,74 @@ To configure the project client, the following options are available (one for ea
 | Jest             	| [jest](https://jestjs.io/)	| "^26.4.2"   |
 | Cypress          	| [cypress](https://docs.cypress.io/guides/getting-started/installing-cypress.html#System-requirements)  | "^5.3.0"   |
 
+#####  Extra dependencies installed
+
+  - Mocha: 
+    - [Chai](chaijs.com), version: "^4.2.0"
+  - Jest: 
+    - [Enzyme](), version: "^3.11.0"
+    - [enzyme-adapter-react-16](enzymejs.github.io/enzyme/), version: "^1.15.5"
+
 #### Documentation
+
+- By selecting Docz:
+  - Each container and component directory will include with a prepopulated index.mdx file.
+  - package.json will include scripts to visualise (docz:dev), and build (docz:build) documentation.
 
 |   Option  	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | none     	        | -              	| -             |
 | Docz 	            | [docz](https://www.docz.site/) 	|  "^2.3.1"   |
-ƒ
+
 #### Single Unit Design
+
+- By selecting Storybook:
+  - Each container and component directory will include with a prepopulated index.stories.js file.
+  - package.json will include scripts to run storybook (npm run storybook)
 
 | Option     	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | none           	  | -              	| -             |
 | Storybook       	| [storybook](https://github.com/storybookjs/storybook/tree/master/lib/cli) 	|  "^6.0.22"   |
 
-### Getting Started
-
-### Notes
-
 ## Backend
 
+### Folder Structure
+
+```bash
+└── projectName_backend
+    |   ├── controllers
+    |   |   ├── index.js
+    |   |   └── controller.js
+    |   ├── models
+    |   |   ├── index.js
+    |   |   └── model.js
+    |   ├── routers
+    |   |   ├── index.js
+    |   |   └── router.js
+    |   ├── index.js
+    |   ├── config.js
+    |   ├── package.json
+    |   └── README.md
+    ├── README.md
+    └── package.json
+```
 
 ### Options
 
 | Framework     	  | Package        	| Version      	|
 |------------------	|---------------	|-------------	|
-| express  | [express](https://expressjs.com/) | "^4.17.1 |
-| koa     | [koa](https://koajs.com/) |  "^2.13.0" |
+| express  | [express](https://expressjs.com/) | "^4.14.1 |
+| koa     | [koa](https://koajs.com/) |  "^2.3.0" |
 
-### Getting Started
+#### Additional Dependencies
+
+  - express:
+    - [cors](github.com/expressjs/cors#readme), version: "^2.8.5"
+  - koa:
+    - [koa-bodyparser](github.com/koajs/body-parser), version: "^"
+    - [@koa/cors](github.com/koajs/cors), version: "^3.1.0"
+    - [koa-router](github.com/koajs/router), version: "^7.2.1"
+    - [koa-static](github.com/koajs/static#readme), version: "^4.0.1"
 
 ### Notes
