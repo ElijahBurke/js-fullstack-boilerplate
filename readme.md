@@ -57,9 +57,10 @@ The general folder structure it exposes:
 
 ### Root Files 
 
-Te create-fullstack-app generates in the root folder a package.json, a README.md and a config/confgiFSApp.json files. 
+The create-fullstack-app generates in the root folder a package.json, a README.md and a config/confgiFSApp.json files. 
+The package exposes two commands that can be used to generate prepulated React components and containers following the selected options.
 
-The config/configFSApp.json file contains all the options selected when creating the prject, allowing the exposure of the following commands:
+The config/configFSApp.json file contains all the options selected when creating the project, allowing the exposure of the two commands:
 
 ```shell
 rg component "${EXAMPLE_COMPONENT_NAME}"
@@ -69,13 +70,16 @@ rg component "${EXAMPLE_COMPONENT_NAME}"
 rg container "${EXAMPLE_CONTAINER_NAME}"
 ```
 
-See documentation [here](#Frontend commands)
+See documentation [here](#Frontend-commands)
 
-## Frontend
+# Frontend
 
 The environment created uses create-react-app to simplify the creation and maintenance of the client app, automating the dependencies update and webpack configuration to CRA.
 
+
 ### Frontend commands
+
+From projectName_client run ```shell npm start``` to start the client.
 
 After the directory generation, the following commands allow the automatic creation and population of React components and containers, with all the required files for the options selected.
 
@@ -163,7 +167,7 @@ Depending on the choosen option, calling  ```shell rg component/container "${nam
 
 - By selecting react-query:
   - root index.js will be populated with ReactQueryCacheProvider and QueryChace
-  - Containers index.js will be prepoulated with methods useQuery, useMutation, useQueryCache.
+  - Containers created with ```rg container  "${name}" ``` will have index.js prepoulated with methods useQuery, useMutation, useQueryCache.
   - in utils directory an ApiService.js file will be created to  add all the api calls (connected to containers already).
 
 | Option 	| Package        	| Version      	|
@@ -245,9 +249,19 @@ Depending on the choosen option, calling  ```shell rg component/container "${nam
 | none           	  | -              	| -             |
 | Storybook       	| [storybook](https://github.com/storybookjs/storybook/tree/master/lib/cli) 	|  "^6.0.22"   |
 
-## Backend
+# Backend
+
+The Environment created uses NodeJS and a framework of choice between [ExpressJS](https://expressjs.com/) and [Koa.js](https://koajs.com/) for the backend basics of the fullstack app.
+
+The database connected to the backend can be selected  between MongoDB and Mongoose or postgreSQL and Sequelize.
+
+From projectName_backend run ```shell nodemon``` to start the backend.
+
+If using sequelize, the database needs to be created before running the backend.
 
 ### Folder Structure
+
+The backend is created using the MVC structure and the directory structure is as follows:
 
 ```bash
 └── projectName_backend
@@ -267,22 +281,38 @@ Depending on the choosen option, calling  ```shell rg component/container "${nam
     ├── README.md
     └── package.json
 ```
-
 ### Options
+
+The backend can be customised using either Koa.js or ExpressJS.
+
+The root index.js file is automatically prepopulated with the correct scripts to run the backend (PORT: 3001) with ```shell nodemon``` from the fullstack_backend directory.
+
+#### Backend 
 
 | Framework     	  | Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | express  | [express](https://expressjs.com/) | "^4.14.1 |
 | koa     | [koa](https://koajs.com/) |  "^2.3.0" |
 
-#### Additional Dependencies
+##### Additional Dependencies
 
+  - [nodemon](nodemon.io), version: "^2.0.4"
   - express:
     - [cors](github.com/expressjs/cors#readme), version: "^2.8.5"
   - koa:
-    - [koa-bodyparser](github.com/koajs/body-parser), version: "^"
+    - [koa-bodyparser](github.com/koajs/body-parser), version: "^4.2.0"
     - [@koa/cors](github.com/koajs/cors), version: "^3.1.0"
     - [koa-router](github.com/koajs/router), version: "^7.2.1"
     - [koa-static](github.com/koajs/static#readme), version: "^4.0.1"
 
-### Notes
+#### Database 
+
+| Framework     	  | Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| MongoDb  | [Mongoose](https://expressjs.com/) | "^5.9.24" |
+| postgreSQL | [Sequelize](https://koajs.com/) |  "^4.37.7" |
+
+##### Additional Dependencies
+
+- postgreSQL:
+  - [pg](github.com/brianc/node-postgres), version: "^7.14.0
