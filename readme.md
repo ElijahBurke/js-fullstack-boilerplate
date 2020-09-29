@@ -137,41 +137,54 @@ Containers requirements: containers can only be generated in the src/containers 
 ### Options
 
 To configure the project client, the following options are available (one for each group):
+#### Styling system
 
-| Style System     	| Package        	| Version      	|
+| Option     	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | css              	| -              	| -             |
 | sass             	| [node-sass](https://www.npmjs.com/package/node-sass) |  "^4.14.1"  |    
 | styled-components	| [styled-components](https://styled-components.com/)  |  "^5.2.0"   |
-|-----------|---------|----------|
-| State Management 	| Package        	| Version      	|
+
+#### State Management
+
+| Option 	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | none             	| -              	| -             |
 | react-redux   	  | [react-redux](https://react-redux.js.org/) |  "^7.2.1"   |
 | react-query   	  | [react-query](https://github.com/tannerlinsley/react-query#readme)   |  "^2.23.0"   |
-|-----------|---------|----------|
-| Helmet           	| Package        	| Version      	|
+
+#### Helmet
+
+| Option           	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | none             	| -              	| -             |
 | react-helmet     	| [react-helmet](github.com/nfl/react-helmet#readme)|   "^6.1.0"   |
-|-----------|---------|----------|
-| Routing          	| Package        	| Version      	|
+
+#### Routing
+
+| Option          	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | none            	| -              	| -             |
 | react-routing    	| [react-router](https://github.com/ReactTraining/react-router#readme)|   "^5.2.0"   |
-|-----------|---------|----------|
-| Test             	| Package        	| Version      	|
+
+#### Testing Library
+
+| Option             	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | Mocha            	| [mocha](https://mochajs.org/)	| "^8.1.3"   |
 | Jest             	| [jest](https://jestjs.io/)	| "^26.4.2"   |
 | Cypress          	| [cypress](https://docs.cypress.io/guides/getting-started/installing-cypress.html#System-requirements)  | "^5.3.0"   |
-|-----------|---------|----------|
-| Documentation    	| Package        	| Version      	|
+
+#### Documentation
+
+|   Option  	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | none     	        | -              	| -             |
 | Docz 	            | [docz](https://www.docz.site/) 	|  "^2.3.1"   |
-|-----------|---------|----------|
-| Unit Design     	| Package        	| Version      	|
+ƒ
+#### Single Unit Design
+
+| Option     	| Package        	| Version      	|
 |------------------	|---------------	|-------------	|
 | none           	  | -              	| -             |
 | Storybook       	| [storybook](https://github.com/storybookjs/storybook/tree/master/lib/cli) 	|  "^6.0.22"   |
