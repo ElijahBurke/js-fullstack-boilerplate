@@ -16,6 +16,13 @@ Requires node v7.6.0 or higher for ES2015 and async function support.
 
 To use the CLI, the following packages are required: [npx](https://www.npmjs.com/package/npx), [create-react-app](https://www.npmjs.com/package/create-react-app), [npm](https://www.npmjs.com/package/npm).
 
+# Table of Contents
+
+ - [Installation](#Installation)
+ - [Getting Started](#Getting Started - Local Development)
+ - [Frontend](#Frontend)
+ - [Backend](#Backend)
+
 ## Installation
 
 To make the package available in the shell as standalone command, it requires a global installation
@@ -24,7 +31,7 @@ To make the package available in the shell as standalone command, it requires a 
 npm install -g js-fullstack-boilerplate
 ```
 
-# Getting Started - Local Development
+## Getting Started - Local Development
 
 When called, the package prepares and pre-compiles the required folder structure and file structure to develop a React-based frontend and a NodeJS backend.
 
@@ -33,7 +40,7 @@ The command starts a questionnaire that selects the available options for the fr
 The following command prompts the start of the creation of a fullstack app in the current directory:
 
 ```shell
-create-fullstack-app <"app-name">
+create-fullstack-app "${EXAMPLE_PROJECT_REPO}"
 ```
 
 The general folder structure it exposes:
@@ -80,20 +87,94 @@ The general folder structure it exposes:
     |   └── README.md
     ├── README.md
     └── package.json
-
 ```
+
+### Root Files 
+
+Te create-fullstack-app generates in the root folder a package.json, a README.md and a config/confgiFSApp.json files. 
+
+The config/configFSApp.json file contains all the options selected when creating the prject, allowing the exposure of the following commands:
+
+```shell
+rg component "${EXAMPLE_COMPONENT_NAME}"
+```
+
+```shell
+rg container "${EXAMPLE_CONTAINER_NAME}"
+```
+
+See documentation [here](#Frontend commands)
 
 ## Frontend
 
-The environment created uses [WebPack](https://webpack.github.io/) to pack the application, and [npm](https://www.npmjs.com/)/[yarn](https://yarnpkg.com/en/) script to automatize the process.
+The environment created uses create-react-app to simplify the creation and maintenance of the client app, automating the dependencies update and webpack configuration to CRA.
+
+### Frontend commands
+
+After the directory generation, the following commands allow the automatic creation and population of React components and containers, with all the required files for the options selected.
+
+```shell
+rg component "${EXAMPLE_COMPONENT_NAME}"
+```
+
+to generate react components in the client/src/components and in client/src/containers/containerExample.
+
+And:
+
+```shell
+rg container "${EXAMPLE_CONTAINER_NAME}"
+```
+
+to generate a container in client/src/containers.
+
+These two commands will generate components and containers in the current shell directory, if it fullfills all the requirements.
+
+Components requirements: current directory to be src/components or src/containers/containerExample 
+    i.e. a component can be generated only inside the components folder or the folder of an existing container in src/containers/ContainerName
+
+Containers requirements: containers can only be generated in the src/containers folder.
 
 ### Options
+
+To configure the project client, the following options are available (one for each group):
+
+  - Styiling system:
+    - css
+    - sass
+    - styled-components (CSS-in-JS)
+
+  - State management:
+    - none
+    - react-redux
+    - react-query
+
+  - Helmet:
+    - none
+    - react-helmet
+
+  - Routing:
+    - none
+    - react-routing
+  
+  - Testing library:
+    - mocha and chai
+    - jest and enzyme
+    - cypress
+
+  - Documentation:
+    - none
+    - Docz
+
+  - Unit Design 
+    - none
+    - Storybook
 
 ### Getting Started
 
 ### Notes
 
 ## Backend
+
 
 ### Options
 
