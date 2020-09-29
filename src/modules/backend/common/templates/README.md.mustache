@@ -1,0 +1,73 @@
+
+# NodeJS {{app_name}} Backend
+
+The Environment created uses NodeJS and a framework of choice between [ExpressJS](https://expressjs.com/) and [Koa.js](https://koajs.com/) for the backend basics of the fullstack app.
+
+The database connected to the backend can be selected  between MongoDB and Mongoose or postgreSQL and Sequelize.
+
+From projectName_backend run ```shell nodemon``` to start the backend.
+
+{{#backend.postgreSQL}}
+For sequelize, the database needs to be created before running the backend.
+{{/backend.postgreSQL}}
+### Folder Structure
+
+The backend is created using the MVC structure and the directory structure is as follows:
+
+```bash
+└── projectName_backend
+    |   ├── controllers
+    |   |   ├── index.js
+    |   |   └── controller.js
+    |   ├── models
+    |   |   ├── index.js
+    |   |   └── model.js
+    |   ├── routers
+    |   |   ├── index.js
+    |   |   └── router.js
+    |   ├── index.js
+    |   ├── config.js
+    |   ├── package.json
+    |   └── README.md
+    ├── README.md
+    └── package.json
+```
+### Options
+
+The backend can be customised using either Koa.js or ExpressJS.
+
+The root index.js file is automatically prepopulated with the correct scripts to run the backend (PORT: 3001) with ```shell nodemon``` from the fullstack_backend directory.
+
+#### Backend 
+
+| Framework     	  | Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| express  | [express](https://expressjs.com/) | "^4.14.1 |
+| koa     | [koa](https://koajs.com/) |  "^2.3.0" |
+
+##### Additional Dependencies
+
+  - [nodemon](nodemon.io), version: "^2.0.4"
+  {{#backend.express}}
+  - express:
+    - [cors](github.com/expressjs/cors#readme), version: "^2.8.5"
+  {{/backend.express}}
+  {{#backend.koa}}
+  - koa:
+    - [koa-bodyparser](github.com/koajs/body-parser), version: "^4.2.0"
+    - [@koa/cors](github.com/koajs/cors), version: "^3.1.0"
+    - [koa-router](github.com/koajs/router), version: "^7.2.1"
+    - [koa-static](github.com/koajs/static#readme), version: "^4.0.1"
+  {{/backend.koa}}
+#### Database 
+
+| Framework     	  | Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| MongoDb  | [Mongoose](https://expressjs.com/) | "^5.9.24" |
+| postgreSQL | [Sequelize](https://koajs.com/) |  "^4.37.7" |
+
+##### Additional Dependencies
+{{#backend.postgreSQL}}
+- postgreSQL:
+  - [pg](github.com/brianc/node-postgres), version: "^7.14.0
+{{/backend.postgreSQL}}

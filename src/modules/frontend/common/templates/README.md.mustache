@@ -1,11 +1,187 @@
-## {{common.app_name}} React Frontend App
+
+# {{app_name}} Frontend
+
+The environment created uses create-react-app to simplify the creation and maintenance of the client app, automating the dependencies update and webpack configuration to CRA.
+
+### Frontend commands
+
+From projectName_client run ```shell npm start``` to start the client.
+
+After the directory generation, the following commands allow the automatic creation and population of React components and containers, with all the required files for the options selected.
+
+```shell
+rg component "${EXAMPLE_COMPONENT_NAME}"
+```
+
+to generate react components in the client/src/components and in client/src/containers/containerExample.
+
+And:
+
+```shell
+rg container "${EXAMPLE_CONTAINER_NAME}"
+```
+
+to generate a container in client/src/containers.
+
+These two commands will generate components and containers in the current shell directory, if it fullfills all the requirements.
+
+Components requirements: current directory to be src/components or src/containers/containerExample 
+    i.e. a component can be generated only inside the components folder or the folder of an existing container in src/containers/ContainerName
+
+Containers requirements: containers can only be generated in the src/containers folder.
+
+### Folder Structure
+
+```bash
+└── projectName_client
+    ├── public
+    |   |   ├── index.html
+    |   |   ├── manifest.json
+    |   |   ├── favicon.ico
+    |   |   ├── robots.txt
+    |   |   ├── logo512.png
+    |   |   └── logo192.png
+    |   ├── src
+    |   |   ├── components
+    |   |   |   └── componentExample
+    |   |   |       ├── index.js
+    |   |   |       ├── index.style.js / index.css / index.scss
+    |   |   |       ├── index.test.js / test/index.test.js
+    |   |   |       ├── index.mdx
+    |   |   |       └── index.stories.js      
+    |   |   ├── containers
+    |   |   |   └── containerExample
+    |   |   |       ├── (generation Option) componentChildOfContainerExample
+    |   |   |       ├── index.js
+    |   |   |       ├── index.style.js / index.css / index.scss
+    |   |   |       ├── index.test.js / test/index.test.js
+    |   |   |       ├── index.mdx
+    |   |   |       └── index.stories.js 
+    |   |   ├── utils
+    |   |   ├── App.js
+    |   |   ├── App.css
+    |   |   ├── index.js
+    |   |   └── index.css
+    |   ├── husky.config.js
+    |   ├── prettier.config.js
+    |   ├── package.json
+    |   ├── README.md
+    |   ├── .env
+    |   └── .prettierignore
+```
 
 
-### Scripts
+### Options
 
-### File and Folder structure
+To configure the project client, the following options are available (one for each group):
 
-### How to
+#### Styling system
 
-### Notes
+Depending on the choosen option, calling  ```shell rg component/container "${name}" ``` will autmatically generate an index.css, index.scss or index.style.js file in the component folder.
 
+| Option     	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| css              	| -              	| -             |
+| sass             	| [node-sass](https://www.npmjs.com/package/node-sass) |  "^4.14.1"  |    
+| styled-components	| [styled-components](https://styled-components.com/)  |  "^5.2.0"   |
+
+#### State Management
+{{#frontend.redux}}
+- By selecting react-redux: 
+  - root index.js will be prepoulated with the required Provider and store for redux.
+  - Containers created with ```rg container  "${name}" ``` will include the connect function and mapStateToProps and mapDispatchToProps connections.
+{{/frontend.redux}}
+{{#frontend.query}}
+- By selecting react-query:
+  - root index.js will be populated with ReactQueryCacheProvider and QueryChace
+  - Containers created with ```rg container  "${name}" ``` will have index.js prepoulated with methods useQuery, useMutation, useQueryCache.
+  - in utils directory an ApiService.js file will be created to  add all the api calls (connected to containers already).
+{{/frontend.query}}
+
+| Option 	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| none             	| -              	| -             |
+| react-redux   	  | [react-redux](https://react-redux.js.org/) |  "^7.2.1"   |
+| react-query   	  | [react-query](https://github.com/tannerlinsley/react-query#readme)   |  "^2.23.0"   |
+{{#frontend.redux}}
+#####  Extra dependencies installed
+
+- React Redux:
+  - [redux](https://redux.js.org/), version: "^4.0.5" 
+  - [thunk](https://www.npmjs.com/package/redux-thunk), version "^2.3.0"
+{{/frontend.redux}}
+{{#frontend.helmet}}
+#### Helmet
+
+- By selecting Helmet:
+  - App.js will be prepopulated with a general <Helmet> tag.
+  - Components and containers will be prepopualted with a general <Helmet> tag.
+
+| Option           	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| none             	| -              	| -             |
+| react-helmet     	| [react-helmet](github.com/nfl/react-helmet#readme)|   "^6.1.0"   |
+{{/frontend.helmet}}
+{{#frontend.routing}}
+#### Routing
+
+- By selecting Routing:
+  - App.js will be prepopulated with react-router and react-router-dom methods and example <Route> tags will be added.
+
+| Option          	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| none            	| -              	| -             |
+| react-routing    	| [react-router](https://github.com/ReactTraining/react-router#readme)|   "^5.2.0"   |
+
+#####  Extra dependencies installed
+
+- [react-router-dom](github.com/ReactTraining/react-router#readme), version: "^5.2.0" 
+
+{{/frontend.routing}}
+#### Testing Library
+
+- By selecting one of the libraries:
+  - a test file in the form of index.test.js will be added to the component/container directory
+  - config files will be added to src
+
+| Option             	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| Mocha            	| [mocha](https://mochajs.org/)	| "^8.1.3"   |
+| Jest             	| [jest](https://jestjs.io/)	| "^26.4.2"   |
+| Cypress          	| [cypress](https://docs.cypress.io/guides/getting-started/installing-cypress.html#System-requirements)  | "^5.3.0"   |
+{{^frontend.cypress}} 
+#####  Extra dependencies installed
+{{/frontend.cypress}}
+{{#frontend.mocha}}
+  - Mocha: 
+    - [Chai](chaijs.com), version: "^4.2.0"
+{{/frontend.mocha}}
+{{#frontend.jest}}  
+  - Jest: 
+    - [Enzyme](), version: "^3.11.0"
+    - [enzyme-adapter-react-16](enzymejs.github.io/enzyme/), version: "^1.15.5"
+{{/frontend.jest}}  
+{{#frontend.documentation}}
+#### Documentation
+
+- By selecting Docz:
+  - Each container and component directory will include with a prepopulated index.mdx file.
+  - package.json will include scripts to visualise (docz:dev), and build (docz:build) documentation.
+
+|   Option  	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| none     	        | -              	| -             |
+| Docz 	            | [docz](https://www.docz.site/) 	|  "^2.3.1"   |
+{{/frontend.documentation}}
+{{#frontend.storybook}}
+#### Single Unit Design
+
+- By selecting Storybook:
+  - Each container and component directory will include with a prepopulated index.stories.js file.
+  - package.json will include scripts to run storybook (npm run storybook)
+
+| Option     	| Package        	| Version      	|
+|------------------	|---------------	|-------------	|
+| none           	  | -              	| -             |
+| Storybook       	| [storybook](https://github.com/storybookjs/storybook/tree/master/lib/cli) 	|  "^6.0.22"   |
+{{/frontend.storybook}}

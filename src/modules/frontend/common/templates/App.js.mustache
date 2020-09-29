@@ -37,35 +37,38 @@ function App() {
      },
   });
   {{/frontend.query}}
-  <>
-    {{#frontend.helmet}}
-    <Helmet>
-      <meta charSet="utf-8" />
-      <title>My Title</title>
-      <link rel="canonical" href="http://mysite.com/example" />
-    </Helmet>
-    {{/frontend.helmet}}
-    //your containers or components come in here
-    {{#frontend.routing}}
-    <Switch>
-      // <Route path="" exact component={} /> // exact url match
-      // <Route path="" component={}/> 
-      // <Route path="" >
-      //  <Redirect path="" component={}/> //redirect from route to redirect
-      // </Route>
-      // <Route path="*" component={}/> // 404 route
-    </Switch>
-    {{/frontend.routing}}
-    {{#frontend.styled_components}}
-    <GlobalStyle />
-    {{/frontend.styled_components}}
-  </>
+  return (
+    <>
+      {{#frontend.helmet}}
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>My Title</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
+      {{/frontend.helmet}}
+      <div className="class"> Hello, fullStackers</div>
+      {{#frontend.routing}}
+      <Switch>
+        {/* <Route path="" exact component={} /> // exact url match
+         <Route path="" component={}/> 
+         <Route path="" >
+         <Redirect path="" component={}/> //redirect from route to redirect
+         </Route>
+         <Route path="*" component={}/> // 404 route
+        */}
+      </Switch>
+      {{/frontend.routing}}
+      {{#frontend.styled_components}}
+      <GlobalStyle />
+      {{/frontend.styled_components}}
+    </>
+  );
 }
 {{#frontend.redux}}
 const mapStateToProps = state => {
   return {
     //get your states here
-    example: state.reducer.example
+    example: state.example.example
   };
 };
 

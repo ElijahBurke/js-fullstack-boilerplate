@@ -22,7 +22,17 @@ const fileEditor = (appName, options) => {
   const packageJSONData = readFile(from);
   const currentDependencies = packageJSONData.dependencies;
   const currentScripts = packageJSONData.scripts;
-
+  // required dependencies
+  currentDependencies["@testing-library/jest-dom"] = "^5.11.4";
+  currentDependencies["@testing-library/react"] = "^11.0.4";
+  currentDependencies["@testing-library/user-event"] = "^12.1.4";
+  currentDependencies["web-vitals"] = "^0.2.4";
+  currentDependencies["prettier"] = "^2.1.2";
+  currentDependencies["pretty-quick"] = "^3.0.2";
+  currentDependencies["husky"] = "^4.3.0";
+  currentDependencies["eslint-plugin-react"] = "^7.21.2";
+  currentScripts["pre-commit"] = "pretty-quick --staged";
+  currentScripts["coverage"] = "npm test -- --coverage --watchAll=false";
   // push necessary packages
   if (options.styled_components) {
     currentDependencies["styled-components"] = "^5.2.0";

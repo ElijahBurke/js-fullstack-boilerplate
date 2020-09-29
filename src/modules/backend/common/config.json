@@ -15,7 +15,7 @@
   },
   {
     "file_name": "README.md",
-    "name": "README.md",
+    "name": "README.md.mustache",
     "path": [],
     "template": false,
     "dependencies": []

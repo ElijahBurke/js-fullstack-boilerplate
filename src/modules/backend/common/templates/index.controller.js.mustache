@@ -32,7 +32,7 @@ const example = require('../models');
   exports.deleteOne = async (req, res) => {
     try {
       const { _id } = req.params;
-      await topic.findByIdAndDelete(_id);
+      await topic.findOneAndDelete({_id});
       res.status(200);
       res.send('Deleted');
     } catch (e) {
@@ -46,7 +46,7 @@ const example = require('../models');
     try {
       const { _id, name } = req.params;
       let sentimentVotes;
-      const updatedExample = await example.findByIdAndUpdate(_id, {
+      const updatedExample = await example.findOneAndUpdate({ _id }, {
         name: name
       }, {new: true});
       res.status(200);
@@ -86,6 +86,40 @@ const example = require('../models');
       res.send(e)
     }
   };
+
+    exports.deleteOne = async (req, res) => {
+    try {
+      const { _id } = req.params;
+      await topic.destroy({
+        where: {
+          _id: _id
+        }
+      })
+      res.status(200);
+      res.send('Deleted');
+    } catch (e) {
+      console.log('e', e); // eslint-disable-line no-console
+      res.status(500);
+      res.send(e);
+    }
+  };
+
+  exports.updateOne = async (req, res) => {
+    try {
+      const { _id } = req.params;
+      let sentimentVotes;
+      const updatedExample = await example.update({ name: req.body.name }, {
+        where: {
+          _id: _id
+        }
+      })
+      res.status(200);
+      res.send(updatedExample);
+    } catch (e) {
+      res.status(500);
+      res.send(e);
+    }
+  };
   {{/backend.postgreSQL}}
 {{/backend.express}}
 
@@ -116,6 +150,26 @@ const example = require('../models');
       ctx.status = 500;
     }
   };
+
+  exports.deleteOne = async (ctx) => {
+    try {
+      ctx.body = await example.findOneAndDelete(ctx.request.params);
+      ctx.status = 201;
+    } catch (e) {
+      ctx.body = e;
+      ctx.status = 500;
+    }
+  };
+
+  exports.updateOne = async (ctx) => {
+    try {
+      ctx.body = await example.findOneAndUpdate(ctx.request.params, ctx.request.body);
+      ctx.status = 201;
+    } catch (e) {
+      ctx.body = e;
+      ctx.status = 500;
+    }
+  };
   {{/backend.mongoDB}}
 
   {{#backend.postgreSQL}}
@@ -142,6 +196,34 @@ const example = require('../models');
     } catch (e) {
       ctx.status = 500;
       // Further handle your error on the back-end
+    }
+  };
+
+    exports.deleteOne = async (ctx) => {
+    try {
+      ctx.body = await example.destroy({
+        where: {
+          _id: ctx.request._id
+        }
+      });
+      ctx.status = 201;
+    } catch (e) {
+      ctx.body = e;
+      ctx.status = 500;
+    }
+  };
+
+  exports.updateOne = async (ctx) => {
+    try {
+      ctx.body = await example.update({ name: ctx.request.body }, {
+        where: {
+          _id: ctx.request._id
+        }
+      });
+      ctx.status = 201;
+    } catch (e) {
+      ctx.body = e;
+      ctx.status = 500;
     }
   };
   {{/backend.postgreSQL}}

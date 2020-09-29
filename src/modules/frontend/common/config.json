@@ -32,6 +32,15 @@
     "template": false
   },
   {
+    "type": "styled_components",
+    "file_name": "App.css",
+    "name": "App.css.mustache",
+    "path": [
+      "src"
+    ],
+    "template": false
+  },
+  {
     "file_name": "App.js",
     "name": "App.js.mustache",
     "path": ["src"],
@@ -83,6 +92,17 @@
     "type": "redux",
     "file_name": "actionExample.js",
     "name": "actionExample.js.mustache",
+    "path": [
+      "src",
+      "store",
+      "actions"
+    ],
+    "template": false
+  },
+  {
+    "type": "redux",
+    "file_name": "index.js",
+    "name": "index.actions.redux.js.mustache",
     "path": [
       "src",
       "store",
