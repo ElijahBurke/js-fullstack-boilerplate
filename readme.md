@@ -169,6 +169,16 @@ To configure the project client, the following options are available (one for ea
     - none
     - Storybook
 
+| Configuration    	|               	|             	|                  	|
+|------------------	|---------------	|-------------	|------------------	|
+| Style system     	| css           	| sass        	| styled-component 	|
+| State Management 	| react-redux   	| react-query 	| none             	|
+| Helmet           	| react-helmet  	| none        	|                  	|
+| Routing          	| react-routing 	| none        	|                  	|
+| Test             	| jest          	| mocha       	| cypress          	|
+| Documentation    	| Docz          	| none        	|                  	|
+| Unit Design      	| Storybook     	| none        	|                  	|
+
 ### Getting Started
 
 ### Notes
